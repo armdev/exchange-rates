@@ -9,9 +9,7 @@ build:
     - mysql:latest
   script:
     - ls -al
-    - apt-get update
-    - apt-cache search maven
-    - apt-get install maven
+    - yum -y install maven
     - mvn -version
   variables:
      MYSQL_DATABASE: root
