@@ -1,7 +1,4 @@
 image: maven:3.3.9-jdk-8
-
-services:
-  - docker:dind
   
 before_script:
  - chmod +x mvn
@@ -16,19 +13,19 @@ stages:
 build:
   stage: build
   script:
-    - "mvn clean package -B -Dmaven.test.skip=true
+    - "mvn clean package -B -Dmaven.test.skip=true"
   allow_failure: false
 
 test:
   stage: test
   script:
-    - "mvn org.jacoco:jacoco-maven-plugin:prepare-agent install -Pcoverage-per-test -B
+    - "mvn org.jacoco:jacoco-maven-plugin:prepare-agent install -Pcoverage-per-test -B"
   allow_failure: false
 
 analyze:
   stage: analyze
   script:
-    - "mvn org.jacoco:jacoco-maven-plugin:prepare-agent verify sonar:sonar -Pcoverage-per-test
+    - "mvn org.jacoco:jacoco-maven-plugin:prepare-agent verify sonar:sonar -Pcoverage-per-test"
 
 #Build docker image
 docker:
@@ -42,4 +39,4 @@ docker:
 deploy:
   stage: deploy
   script:
-    - "mvn org.jacoco:jacoco-maven-plugin:prepare-agent deploy -Pcoverage-per-test
+    - "mvn org.jacoco:jacoco-maven-plugin:prepare-agent deploy -Pcoverage-per-test"
