@@ -7,9 +7,9 @@ stages:
 build:
   stage: build
   script:
-   # - "cd rates-backend"
-   # - "mvn clean package -B -Dmaven.test.skip=true"
-    #- "cd .."
+    - "cd rates-backend"
+    - "mvn clean package -B -Dmaven.test.skip=true"
+    - "cd .."
     - "cd rates-web"
     - "mvn clean package -B assembly:assembly -DdescriptorId=jar-with-dependencies -Dmaven.test.skip=true"
   allow_failure: false
