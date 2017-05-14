@@ -7,6 +7,12 @@ services:
 
 build:
   stage: build
+  services:
+    - mysql:latest
   script:
     - ls -al
+    - "mvn install -B"
+  variables:
+  MYSQL_DATABASE: root
+  MYSQL_ROOT_PASSWORD: root
     
