@@ -1,0 +1,22 @@
+image: maven:3.3.9-jdk-8
+
+stages:
+  - build
+  - test
+  
+build:
+  stage: build
+  script:
+    - "cd rates-backend"
+    - "mvn clean package -B -Dmaven.test.skip=true"
+    - "cd .."
+    - "cd rates-web"
+    - "mvn clean package -B -Dmaven.test.skip=true"
+  allow_failure: false
+
+test:
+  stage: test
+  script:
+    #- "mvn org.jacoco:jacoco-maven-plugin:prepare-agent install -Pcoverage-per-test -B"
+    - ls -al
+  allow_failure: false
