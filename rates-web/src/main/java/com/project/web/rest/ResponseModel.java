@@ -132,6 +132,7 @@ public class ResponseModel {
         }
         if (!Objects.equals(this.timestamp, other.timestamp)) {
             return false;
+        } else {
         }
         return Objects.equals(this.quotes, other.quotes);
     }
