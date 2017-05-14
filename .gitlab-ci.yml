@@ -9,7 +9,10 @@ build:
     - mysql:latest
   script:
     - ls -al
-    - "mvn install -B"
+    - apt-get update
+    - apt-cache search maven
+    - apt-get install maven
+    - mvn -version
   variables:
      MYSQL_DATABASE: root
      MYSQL_ROOT_PASSWORD: root
