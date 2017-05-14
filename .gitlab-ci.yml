@@ -1,4 +1,5 @@
-image: lwieske/java-8
+#image: lwieske/java-8
+image: bandeszko/gitlab-runner-maven-java8-sonar
 
 services:
   - docker:dind
@@ -9,8 +10,8 @@ build:
     - mysql:latest
   script:
     - ls -al /
-    - which yum
-    - which mysql
+    - which maven
+    - which java
     - uname -r
     #- "yum -y install maven"
     #- "mvn -version"
