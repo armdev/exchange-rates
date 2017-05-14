@@ -1,5 +1,6 @@
 package com.project.web.service;
 
+import com.project.services.DictionaryService;
 import com.project.services.UserService;
 import java.io.Serializable;
 import javax.faces.bean.ApplicationScoped;
@@ -17,7 +18,13 @@ public class ApplicationManager implements Serializable {
     @ManagedProperty("#{userService}")
     @Setter
     @Getter
-    private UserService userService = null;   
+    private UserService userService = null; 
+    
+    
+    @ManagedProperty("#{dictionaryService}")
+    @Setter
+    @Getter
+    private DictionaryService dictionaryService = null; 
 
 
 

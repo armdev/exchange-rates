@@ -16,11 +16,8 @@ import org.primefaces.event.TabChangeEvent;
 @SessionScoped
 public class SessionContext implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
+    private static final long serialVersionUID = 1L;  
   
-    @Setter
-    @Getter
     private User user;
     @Setter
     @Getter
@@ -28,7 +25,7 @@ public class SessionContext implements Serializable {
    
 
     public SessionContext() {      
-        user = new User();      
+            
     }
 
     public void onChange(TabChangeEvent event) {
@@ -50,6 +47,14 @@ public class SessionContext implements Serializable {
                 break;
         }
 
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
    
