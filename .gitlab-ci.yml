@@ -1,16 +1,45 @@
-image: bandeszko/gitlab-runner-maven-java8-sonar
+image: maven:3.3.9-jdk-8
 
 services:
   - docker:dind
-
+  
+before_script:
+ - chmod +x mvn
+ 
+stages:
+  - build
+  - test
+  - analyze
+  - docker
+  - deploy
+  
 build:
   stage: build
-  services:
-    - mysql:latest
   script:
-    - ls -al /
-    - maven --version
-    - uname -r
-  variables:
-     MYSQL_DATABASE: root
-     MYSQL_ROOT_PASSWORD: root
+    - "mvn clean package -B -Dmaven.test.skip=true
+  allow_failure: false
+
+test:
+  stage: test
+  script:
+    - "mvn org.jacoco:jacoco-maven-plugin:prepare-agent install -Pcoverage-per-test -B
+  allow_failure: false
+
+analyze:
+  stage: analyze
+  script:
+    - "mvn org.jacoco:jacoco-maven-plugin:prepare-agent verify sonar:sonar -Pcoverage-per-test
+
+#Build docker image
+docker:
+  stage: docker
+  script:
+#   - "mvn docker:build"
+
+    # create 2 image tags
+    - " docker build -t groupID/artifactID:1.0.4 -t shykes/myapp:latest ."
+
+deploy:
+  stage: deploy
+  script:
+    - "mvn org.jacoco:jacoco-maven-plugin:prepare-agent deploy -Pcoverage-per-test
