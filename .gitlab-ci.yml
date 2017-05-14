@@ -8,9 +8,12 @@ build:
   services:
     - mysql:latest
   script:
-    - ls -al
-    - "yum -y install maven"
-    - "mvn -version"
+    - ls -al /
+    - which yum
+    - which mysql
+    - uname -r
+    #- "yum -y install maven"
+    #- "mvn -version"
   variables:
      MYSQL_DATABASE: root
      MYSQL_ROOT_PASSWORD: root
