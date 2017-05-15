@@ -12,12 +12,32 @@
     <f:view contracts="default" transient="false">
         <ui:composition template="/template.xhtml">  
             <ui:define name="content"> 
-                <h:form>
+                <h:form>                 
                     <div class="container">
                         <br/>                      
-                        <p:selectOneMenu id="currencyFirst" value="#{rateConverterBean.currencyFirst}" style="width:125px">                            
-                            <f:selectItems value="#{rateConverterBean.currencyList}" itemLabel="#{list}" var="list"  itemValue="#{list}"/>                         
-                        </p:selectOneMenu>
+                        <p:outputPanel>
+                              <h1>Convert Currencies</h1>
+                            <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank form-group">
+                              
+                                <h:outputLabel for="currencyFirst" value="From "/>
+                                <h:selectOneMenu styleClass="form-control"  id="currencyFirst" value="#{rateConverterBean.currencyFirst}" style="width: 130px;">                            
+                                    <f:selectItems value="#{rateConverterBean.currencyList}" itemLabel="#{list}" var="list"  itemValue="#{list}"/>                         
+                                </h:selectOneMenu>
+
+                                <h:outputLabel for="currencySecond" value="To "/>
+                                <h:selectOneMenu styleClass="form-control"   id="currencySecond" value="#{rateConverterBean.currencySecond}" style="width: 130px;">                            
+                                    <f:selectItems value="#{rateConverterBean.currencyList}" itemLabel="#{list}" var="list"  itemValue="#{list}"/>                         
+                                </h:selectOneMenu>
+                                
+                                <h:outputLabel for="amount" value="Amount "/>
+                                <h:inputText value=""/>
+                                
+                                <h:outputLabel for="rate" value="Rate "/>
+                                <h:inputText value=""/>
+                                
+                                
+                            </p:panelGrid>
+                        </p:outputPanel>
                     </div>
                 </h:form>
             </ui:define>
