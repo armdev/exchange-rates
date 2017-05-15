@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -18,7 +17,6 @@ import javax.faces.context.FacesContext;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.apache.commons.lang3.StringUtils;
 
 /**
  *
@@ -52,9 +50,6 @@ public class ConverterBean implements Serializable {
     private String currencyFirst;
     @Setter
     @Getter
-    private String currencySecond;
-    @Setter
-    @Getter
     private double amount = 1d;
     @Setter
     @Getter
@@ -64,21 +59,18 @@ public class ConverterBean implements Serializable {
     public void init() {
         context = FacesContext.getCurrentInstance();
         externalContext = context.getExternalContext();
-
     }
-    //http://apilayer.net/api/live?access_key=f4446d2499d427eca4efee698b587c1e&currencies=AMD,EUR,CAD&format=1
 
     public void doAction() {
         ResponseModel model = restClient.getConvertRates(currencyFirst);
-        System.out.println(model.toString());
+        // System.out.println(model.toString());
         if (model.getQuotes() != null) {
             sessionContext.setRate(0);
             if (currencyFirst.equalsIgnoreCase("EUR")) {
                 rate = model.getQuotes().getUSDEUR();
             } else if (currencyFirst.equalsIgnoreCase("AMD")) {
                 rate = model.getQuotes().getUSDAMD();
-            } else if (currencyFirst.equalsIgnoreCase("CBP")) {
-                rate = model.getQuotes().getUSDCBP();
+
             } else if (currencyFirst.equalsIgnoreCase("NZD")) {
                 rate = model.getQuotes().getUSDNZD();
             } else if (currencyFirst.equalsIgnoreCase("AUD")) {
@@ -87,8 +79,7 @@ public class ConverterBean implements Serializable {
                 rate = model.getQuotes().getUSDJPY();
             } else if (currencyFirst.equalsIgnoreCase("HUF")) {
                 rate = model.getQuotes().getUSDHUF();
-            } else if (currencyFirst.equalsIgnoreCase("ZWD")) {
-                rate = model.getQuotes().getUSDZWD();
+
             } else if (currencyFirst.equalsIgnoreCase("CAD")) {
                 rate = model.getQuotes().getUSDCAD();
             } else if (currencyFirst.equalsIgnoreCase("USD")) {
@@ -98,15 +89,10 @@ public class ConverterBean implements Serializable {
             }
             amount = 1;
             sessionContext.setRate(rate);
-           // if (model.getQuotes().getUSDUSD() != null) {
-            //    rate = amount * model.getQuotes().getUSDUSD();
-
-           // }
         }
     }
 
     public void handleBlurEvent() {
-
         LOG.info("Rate " + sessionContext.getRate());
         rate = amount * sessionContext.getRate();
         LOG.info("Final Rate " + sessionContext.getRate());
@@ -114,10 +100,6 @@ public class ConverterBean implements Serializable {
 
     public List<String> getCurrencyList() {
         return applicationManager.getCurrencyList();
-    }
-
-    public void addMessage(FacesMessage message) {
-        FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
 }

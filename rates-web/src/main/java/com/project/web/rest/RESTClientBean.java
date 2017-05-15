@@ -34,7 +34,7 @@ public class RESTClientBean implements Serializable {
     private final String SERVICE_PATH = "http://apilayer.net/api/";
 
     private final String ACCESS_KEY = "f4446d2499d427eca4efee698b587c1e";
-   
+
     public RESTClientBean() {
 
     }
@@ -44,12 +44,11 @@ public class RESTClientBean implements Serializable {
 
     }
 
-    public ResponseModel getLiveRates(String firstCurrency) {
+    public ResponseModel getLiveRates() {
         CloseableHttpClient CLIENT = HttpClients.createDefault();
         ResponseModel model = new ResponseModel();
         try {
             String currencies = StringUtils.join(applicationManager.getCurrencyList(), ',');
-            LOG.info("firstCurrency " + firstCurrency);
             HttpGet request = new HttpGet(SERVICE_PATH + "live?access_key=" + ACCESS_KEY + "&currencies=" + currencies + "&format=1");
             request.addHeader("charset", "UTF-8");
             HttpResponse response = CLIENT.execute(request);

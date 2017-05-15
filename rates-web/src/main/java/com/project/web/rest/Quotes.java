@@ -14,12 +14,10 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 @JsonPropertyOrder({
     "USDUSD",
     "USDEUR",
-    "USDAMD",
-    "USDCBP",
+    "USDAMD",   
     "USDNZD",
     "USDJPY",
-    "USDHUF",
-    "USDZWD",
+    "USDHUF",    
     "USDCAD"
 })
 public class Quotes {
@@ -29,9 +27,7 @@ public class Quotes {
     @JsonProperty("USDEUR")
     private Double uSDEUR;
     @JsonProperty("USDAMD")
-    private Double uSDAMD;
-    @JsonProperty("USDCBP")
-    private Double uSDCBP;
+    private Double uSDAMD;  
     @JsonProperty("USDNZD")
     private Double uSDNZD;
     @JsonProperty("USDAUD")
@@ -39,9 +35,7 @@ public class Quotes {
     @JsonProperty("USDJPY")
     private Double uSDJPY;
     @JsonProperty("USDHUF")
-    private Double uSDHUF;
-    @JsonProperty("USDZWD")
-    private Double uSDZWD;
+    private Double uSDHUF;  
     @JsonProperty("USDCAD")
     private Double uSDCAD;
 
@@ -79,16 +73,7 @@ public class Quotes {
         this.uSDAMD = uSDAMD;
     }
 
-    @JsonProperty("USDCBP")
-    public Double getUSDCBP() {
-        return uSDCBP;
-    }
-
-    @JsonProperty("USDCBP")
-    public void setUSDCBP(Double uSDCBP) {
-        this.uSDCBP = uSDCBP;
-    }
-
+ 
     @JsonProperty("USDNZD")
     public Double getUSDNZD() {
         return uSDNZD;
@@ -129,15 +114,6 @@ public class Quotes {
         this.uSDHUF = uSDHUF;
     }
 
-    @JsonProperty("USDZWD")
-    public Double getUSDZWD() {
-        return uSDZWD;
-    }
-
-    @JsonProperty("USDZWD")
-    public void setUSDZWD(Double uSDZWD) {
-        this.uSDZWD = uSDZWD;
-    }
 
     @JsonProperty("USDCAD")
     public Double getUSDCAD() {

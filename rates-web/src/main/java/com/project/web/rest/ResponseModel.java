@@ -36,6 +36,7 @@ public class ResponseModel {
     @JsonIgnore
     private final Map<String, Object> additionalProperties = new HashMap<>();
 
+
     @JsonProperty("success")
     public Boolean getSuccess() {
         return success;
@@ -141,7 +142,5 @@ public class ResponseModel {
     public String toString() {
         return "ResponseModel{" + "success=" + success + ", terms=" + terms + ", privacy=" + privacy + ", timestamp=" + timestamp + ", source=" + source + ", quotes=" + quotes + ", additionalProperties=" + additionalProperties + '}';
     }
-    
-    
 
 }

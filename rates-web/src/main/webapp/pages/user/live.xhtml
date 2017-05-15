@@ -14,42 +14,38 @@
             <ui:define name="content"> 
                 <h:form prependId="false">                 
                     <div class="container">
-                     
                         <p:growl/>
-                        <p:outputPanel autoUpdate="true">
+                        <p:poll interval="10" update="livepanel"/>
+                        <p:outputPanel autoUpdate="true" id="livepanel">
                             <p:panelGrid style="margin-top:20px"> 
                                 <f:facet name="header">
                                     <p:row>
-                                        <p:column colspan="18">Live Exchange Rates</p:column>
+                                        <p:column colspan="18">Live Exchange Rates(updates every 1800 second</p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="18">#{liveRatesBean.timeStamp}</p:column>
                                     </p:row>
                                     <p:row>
                                         <p:column colspan="2">USDEUR</p:column>
-                                        <p:column colspan="2">USDAMD</p:column>
-                                        <p:column colspan="2">USDCBP</p:column>
+                                        <p:column colspan="2">USDAMD</p:column>                                       
                                         <p:column colspan="2">USDNZD</p:column>
                                         <p:column colspan="2">USDJPY</p:column>
-                                        <p:column colspan="2">USDHUF</p:column>
-                                        <p:column colspan="2">USDZWD</p:column>
+                                        <p:column colspan="2">USDHUF</p:column>                                      
                                         <p:column colspan="2">USDCAD</p:column>
                                         <p:column colspan="2">USDAUD</p:column>
                                     </p:row>
                                 </f:facet>
                                 <p:row>
-                                    <p:column colspan="2">1111</p:column>
-                                    <p:column colspan="2">2121122</p:column>
-                                    <p:column colspan="2">654564</p:column>
-                                    <p:column colspan="2">1111</p:column>
-                                    <p:column colspan="2">2121122</p:column>
-                                    <p:column colspan="2">654564</p:column>
-                                    <p:column colspan="2">1111</p:column>
-                                    <p:column colspan="2">2121122</p:column>
-                                    <p:column colspan="2">654564</p:column>
+                                    <p:column colspan="2">#{liveRatesBean.responseModel.quotes.USDEUR}</p:column>
+                                    <p:column colspan="2">#{liveRatesBean.responseModel.quotes.USDAMD}</p:column>
+                                    <p:column colspan="2">#{liveRatesBean.responseModel.quotes.USDCBP}</p:column>
+                                    <p:column colspan="2">#{liveRatesBean.responseModel.quotes.USDNZD}</p:column>
+                                    <p:column colspan="2">#{liveRatesBean.responseModel.quotes.USDJPY}</p:column>
+                                    <p:column colspan="2">#{liveRatesBean.responseModel.quotes.USDHUF}</p:column>
+                                    <p:column colspan="2">#{liveRatesBean.responseModel.quotes.USDZWD}</p:column>
+                                    <p:column colspan="2">#{liveRatesBean.responseModel.quotes.USDCAD}</p:column>
+                                    <p:column colspan="2">#{liveRatesBean.responseModel.quotes.USDAUD}</p:column>
                                 </p:row>
-
-
-
-
-
                             </p:panelGrid>
                         </p:outputPanel>
                     </div>
