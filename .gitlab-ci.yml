@@ -3,6 +3,12 @@ image: maven:3.3.9-jdk-8
 stages:
   - build
   - test
+
+cache:
+  key: ${CI_BUILD_NAME}
+  paths:
+  - rates-backend/
+  - rates-web/
   
 build:
   stage: build
@@ -12,6 +18,9 @@ build:
     - "cd .."
     - "cd rates-web"
     - "mvn clean package -U assembly:assembly -DdescriptorId=../rates-backend/target/rates-backend-1.0-SNAPSHOT.jar -Dmaven.test.skip=true"
+  artifacts:
+      paths:
+    - "rates-backend/target/rates-backend-1.0-SNAPSHOT.jar"
   allow_failure: false
 
 test:
