@@ -18,6 +18,8 @@ public class SessionContext implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @Setter
+    @Getter
     private User user = new User();
     @Setter
     @Getter
@@ -49,14 +51,6 @@ public class SessionContext implements Serializable {
                 break;
         }
 
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+    }  
 
 }
