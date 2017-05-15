@@ -28,7 +28,7 @@ CREATE TABLE `currency` (
 
 /*Data for the table `currency` */
 
-insert  into `currency`(`id`,`currency`) values (1,'EUR'),(2,'USD'),(3,'AMD'),(4,'CBP'),(5,'NZD'),(6,'AUD'),(7,'JPY'),(8,'HUF'),(9,'ZWD'),(10,'CAD');
+insert  into `currency`(`id`,`currency`) values (1,'EUR'),(2,'AMD'),(3,'NZD'),(4,'AUD'),(5,'JPY'),(6,'HUF'),(7,'CAD');
 
 /*Table structure for table `user` */
 
