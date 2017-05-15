@@ -1,5 +1,6 @@
 package com.project.web.rest;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -19,7 +20,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
     "source",
     "quotes"
 })
-public class ResponseModel {
+public class ResponseModel implements Serializable{
 
     @JsonProperty("success")
     private Boolean success;

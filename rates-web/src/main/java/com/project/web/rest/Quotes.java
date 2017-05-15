@@ -1,5 +1,6 @@
 package com.project.web.rest;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -20,7 +21,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
     "USDHUF",    
     "USDCAD"
 })
-public class Quotes {
+public class Quotes implements Serializable{
 
     @JsonProperty("USDUSD")
     private Integer uSDUSD;

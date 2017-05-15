@@ -57,8 +57,8 @@ public class CacheHandler implements Serializable {
         if (this.liveCache == null) {
             this.liveCache = this.manager.getCache("live.cache");
         }
-        LOG.info("PUTTING CACHE " +key);
-        LOG.info("PUTTING CACHE " +value.toString());
+        LOG.info("PUTTING CACHE " + key);
+        LOG.info("PUTTING CACHE " + value.toString());
         liveCache.put(new Element(key, value));
         liveCache.flush();
         return true;
@@ -70,11 +70,15 @@ public class CacheHandler implements Serializable {
                 this.liveCache = this.manager.getCache("live.cache");
             }
             Element elem = this.liveCache.get(key);
-            if ((elem != null) && (elem.getObjectValue() != null)) {
 
+            LOG.info("getLiveCache " + key);
+
+            if ((elem != null) && (elem.getObjectValue() != null)) {
+                LOG.info("getLiveCache### " + elem.toString());
                 return elem.getObjectValue();
             }
         } catch (ClassCastException | IllegalStateException | CacheException e) {
+            e.printStackTrace();
         }
         return null;
     }

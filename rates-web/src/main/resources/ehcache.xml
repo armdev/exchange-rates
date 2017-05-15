@@ -1,32 +1,32 @@
-<ehcache>
-    
-    <defaultCache
-        maxElementsInMemory="500"
-        eternal="false"
-        overflowToDisk="false"
-        overflowToOffHeap="false"
-        memoryStoreEvictionPolicy="LRU" >
-        <persistence strategy="none" />
-    </defaultCache>
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ehcache.xsd" updateCheck="true"
+	monitoring="autodetect" dynamicConfig="true">
+   
+    <diskStore path="java.io.tmpdir" />
 
     <cache name="live.cache" 
-           maxElementsInMemory="500" 
+           maxEntriesLocalHeap="10000"
+           maxEntriesLocalDisk="1000"
            eternal="false"
-           overflowToDisk="false"
-           overflowToOffHeap="false"
-           memoryStoreEvictionPolicy="LRU" >
-
-        <persistence strategy="none" />
+           diskSpoolBufferSizeMB="20"
+           timeToIdleSeconds="300"
+           timeToLiveSeconds="600"
+           memoryStoreEvictionPolicy="LFU"
+           transactionalMode="off">
+        <persistence strategy="localTempSwap" />
     </cache>
     
     <cache name="historical.cache" 
-            maxElementsInMemory="500" 
-            eternal="false"
-            overflowToDisk="false"
-            overflowToOffHeap="false"
-            memoryStoreEvictionPolicy="LRU" >
-
-        <persistence strategy="none" />
+           maxEntriesLocalHeap="10000"
+           maxEntriesLocalDisk="1000"
+           eternal="false"
+           diskSpoolBufferSizeMB="20"
+           timeToIdleSeconds="300"
+           timeToLiveSeconds="600"
+           memoryStoreEvictionPolicy="LFU"
+           transactionalMode="off">
+        <persistence strategy="localTempSwap" />
     </cache>
 
    
