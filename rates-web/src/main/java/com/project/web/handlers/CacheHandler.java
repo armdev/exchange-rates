@@ -40,6 +40,7 @@ public class CacheHandler implements Serializable {
     @PostConstruct
     public void init() {
         try {
+            
             ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
             InputStream fis = classLoader.getResourceAsStream("ehcache.xml");
             this.manager = CacheManager.create(fis);
