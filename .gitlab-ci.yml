@@ -19,7 +19,7 @@ build:
     - "cd .."
     - "cd rates-web"
     - "mvn install:install-file -Dfile=../rates-backend/target/rates-backend-1.0-SNAPSHOT.jar package -U -Dmaven.test.skip=true"
-    #- "mvn clean package -U -Dmaven.test.skip=true"
+    - "ls -al target/"
   artifacts:
       paths:
         - "rates-backend/target/rates-backend-1.0-SNAPSHOT.jar"
