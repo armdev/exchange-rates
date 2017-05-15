@@ -15,8 +15,10 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,7 +28,7 @@ import lombok.Setter;
  * @author armdev
  */
 @ManagedBean(name = "rateConverterBean")
-@SessionScoped
+@ViewScoped
 @NoArgsConstructor
 public class ConverterBean implements Serializable {
 
@@ -59,7 +61,7 @@ public class ConverterBean implements Serializable {
     private double amount = 1d;
     @Setter
     @Getter
-    private double rate = 0l;
+    private double rate = 1d;
 
     @PostConstruct
     public void init() {
@@ -98,11 +100,19 @@ public class ConverterBean implements Serializable {
             } else {
                 rate = 0d;
             }
-
-            if (model.getQuotes().getUSDUSD() != null) {
-                amount *= model.getQuotes().getUSDUSD();
+            
+            sessionContext.setRate(rate);
+            if (model.getQuotes().getUSDUSD() != null) {               
+                 rate = amount * model.getQuotes().getUSDUSD();
             }
         }
+    }
+
+    public void handleBlurEvent() {
+        LOG.info("Amount " +amount);
+        LOG.info("Rate " +sessionContext.getRate());
+        rate = amount * sessionContext.getRate();
+        LOG.info("Final Rate " +sessionContext.getRate());
     }
 
     public List<String> getCurrencyList() {

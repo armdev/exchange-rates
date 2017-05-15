@@ -44,21 +44,15 @@ public class UserLogin {
     @Setter
     private SessionContext sessionContext = null;
 
-    public String loginUser() {
-        FacesContext context = FacesContext.getCurrentInstance();
-        ExternalContext ex = context.getExternalContext();
-        HttpServletRequest httpServletRequest = (HttpServletRequest) ex.getRequest();
-        String ip = httpServletRequest.getRemoteAddr();
+    public String loginUser() {        
         User user = applicationManager.getUserService().userLogin(email, password);
         if (user != null) {
             sessionContext.setUser(user);
             return "profile";
-        } else {
-            FacesMessage msg = new FacesMessage(bundle.getString("nouser"), bundle.getString("nouser"));
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-            return null;
         }
-
+        FacesMessage msg = new FacesMessage(bundle.getString("nouser"), bundle.getString("nouser"));
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        return null;
     }
 
 }
