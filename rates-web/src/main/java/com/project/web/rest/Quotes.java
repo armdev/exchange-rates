@@ -69,71 +69,85 @@ public class Quotes {
     }   
 
 
+    @JsonProperty("USDAMD")
     public Double getUSDAMD() {
         return uSDAMD;
     }
 
+    @JsonProperty("USDAMD")
     public void setUSDAMD(Double uSDAMD) {
         this.uSDAMD = uSDAMD;
     }
 
+    @JsonProperty("USDCBP")
     public Double getUSDCBP() {
         return uSDCBP;
     }
 
+    @JsonProperty("USDCBP")
     public void setUSDCBP(Double uSDCBP) {
         this.uSDCBP = uSDCBP;
     }
 
+    @JsonProperty("USDNZD")
     public Double getUSDNZD() {
         return uSDNZD;
     }
 
+    @JsonProperty("USDNZD")
     public void setUSDNZD(Double uSDNZD) {
         this.uSDNZD = uSDNZD;
     }
 
+    @JsonProperty("USDAUD")
     public Double getUSDAUD() {
         return uSDAUD;
     }
 
+    @JsonProperty("USDAUD")
     public void setUSDAUD(Double uSDAUD) {
         this.uSDAUD = uSDAUD;
     }
 
+    @JsonProperty("USDJPY")
     public Double getUSDJPY() {
         return uSDJPY;
     }
 
+    @JsonProperty("USDJPY")
     public void setUSDJPY(Double uSDJPY) {
         this.uSDJPY = uSDJPY;
     }
 
+    @JsonProperty("USDHUF")
     public Double getUSDHUF() {
         return uSDHUF;
     }
 
+    @JsonProperty("USDHUF")
     public void setUSDHUF(Double uSDHUF) {
         this.uSDHUF = uSDHUF;
     }
 
+    @JsonProperty("USDZWD")
     public Double getUSDZWD() {
         return uSDZWD;
     }
 
+    @JsonProperty("USDZWD")
     public void setUSDZWD(Double uSDZWD) {
         this.uSDZWD = uSDZWD;
     }
 
+    @JsonProperty("USDCAD")
     public Double getUSDCAD() {
         return uSDCAD;
     }
 
+    @JsonProperty("USDCAD")
     public void setUSDCAD(Double uSDCAD) {
         this.uSDCAD = uSDCAD;
-    }
-
-    
+    }    
     
     @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {

@@ -38,20 +38,18 @@ public class RESTClientBean implements Serializable {
 
     }
 
-    public ResponseModel getLiveRates(String firstCurrency, String secondCurrency) {
+    public ResponseModel getLiveRates(String firstCurrency) {
         CloseableHttpClient CLIENT = HttpClients.createDefault();
         ResponseModel model = new ResponseModel();
         try {
-            LOG.info("firstCurrency " +firstCurrency);
-            LOG.info("secondCurrency " +secondCurrency);
-            HttpGet request = new HttpGet(SERVICE_PATH + "live?access_key=" + ACCESS_KEY + "&currencies=" + firstCurrency + "," + secondCurrency + "&format=1");
+            LOG.info("firstCurrency " +firstCurrency);            
+            HttpGet request = new HttpGet(SERVICE_PATH + "live?access_key=" + ACCESS_KEY + "&currencies=" + firstCurrency + "&format=1");
             request.addHeader("charset", "UTF-8");
             HttpResponse response = CLIENT.execute(request);
             response.addHeader("content-type", "application/json;charset=UTF-8");
             HttpEntity entity = response.getEntity();
             ObjectMapper mapper = new ObjectMapper();
-            model = mapper.readValue(EntityUtils.toString(entity), ResponseModel.class);
-          
+            model = mapper.readValue(EntityUtils.toString(entity), ResponseModel.class);          
         } catch (IOException | ParseException ex) {
             try {
                 CLIENT.close();

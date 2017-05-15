@@ -72,11 +72,36 @@ public class ConverterBean implements Serializable {
     //http://apilayer.net/api/live?access_key=f4446d2499d427eca4efee698b587c1e&currencies=AMD,EUR,CAD&format=1
 
     public void doAction() {
-        ResponseModel model = restClient.getLiveRates(currencyFirst, currencyFirst);
+        ResponseModel model = restClient.getLiveRates(currencyFirst);
         System.out.println(model.toString());
         if (model.getQuotes() != null) {
-            rate = model.getQuotes().getUSDEUR();
-            amount = model.getQuotes().getUSDUSD();
+            if (currencyFirst.equalsIgnoreCase("EUR")) {
+                rate = model.getQuotes().getUSDEUR();
+            } else if (currencyFirst.equalsIgnoreCase("AMD")) {
+                rate = model.getQuotes().getUSDAMD();
+            } else if (currencyFirst.equalsIgnoreCase("CBP")) {
+                rate = model.getQuotes().getUSDCBP();
+            } else if (currencyFirst.equalsIgnoreCase("NZD")) {
+                rate = model.getQuotes().getUSDNZD();
+            } else if (currencyFirst.equalsIgnoreCase("AUD")) {
+                rate = model.getQuotes().getUSDAUD();
+            } else if (currencyFirst.equalsIgnoreCase("JPY")) {
+                rate = model.getQuotes().getUSDJPY();
+            } else if (currencyFirst.equalsIgnoreCase("HUF")) {
+                rate = model.getQuotes().getUSDHUF();
+            } else if (currencyFirst.equalsIgnoreCase("ZWD")) {
+                rate = model.getQuotes().getUSDZWD();
+            } else if (currencyFirst.equalsIgnoreCase("CAD")) {
+                rate = model.getQuotes().getUSDCAD();
+            } else if (currencyFirst.equalsIgnoreCase("USD")) {
+                rate = model.getQuotes().getUSDUSD();
+            } else {
+                rate = 0d;
+            }
+
+            if (model.getQuotes().getUSDUSD() != null) {
+                amount *= model.getQuotes().getUSDUSD();
+            }
         }
     }
 
