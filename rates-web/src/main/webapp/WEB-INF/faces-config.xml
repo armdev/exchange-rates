@@ -63,8 +63,8 @@
             <redirect/>
         </navigation-case>     
         <navigation-case>
-            <from-outcome>viewExpired</from-outcome>
-            <to-view-id>/errorpages/viewexpired.xhtml</to-view-id>
+            <from-outcome>error</from-outcome>
+            <to-view-id>/error/error.xhtml</to-view-id>
             <redirect/>
         </navigation-case>      
         <navigation-case>

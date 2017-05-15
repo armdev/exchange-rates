@@ -14,11 +14,9 @@
             <ui:define name="content"> 
                 <h:form>
                     <div class="container">
-                        <br/>
-                      
-                        <p:selectOneMenu id="currencyFirst" value="#{rateConverterBean.currencyFirst}"  var="list" style="width:125px">
-                            <f:selectItems itemValue="#{rateConverterBean.currencyList}" itemLabel="#{list}" value="#{list}"  />
-                         
+                        <br/>                      
+                        <p:selectOneMenu id="currencyFirst" value="#{rateConverterBean.currencyFirst}" style="width:125px">                            
+                            <f:selectItems value="#{rateConverterBean.currencyList}" itemLabel="#{list}" var="list"  itemValue="#{list}"/>                         
                         </p:selectOneMenu>
                     </div>
                 </h:form>
