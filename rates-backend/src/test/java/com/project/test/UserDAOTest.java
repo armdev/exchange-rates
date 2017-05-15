@@ -13,9 +13,10 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
@@ -42,11 +43,11 @@ public class UserDAOTest {
     }
 
     @Autowired
-    @Qualifier("userDAO")
+    @Qualifier("userDAO")   
     private final UserDAO instance = null;
 
     @Before
-    public void setUp() {
+    public void setUp() {     
 
     }
 
