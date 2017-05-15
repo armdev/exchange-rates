@@ -18,7 +18,7 @@ public class SessionContext implements Serializable {
 
     private static final long serialVersionUID = 1L;  
   
-    private User user;
+    private User user = new User();
     @Setter
     @Getter
     private Integer activeIndex = 0;

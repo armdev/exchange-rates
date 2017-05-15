@@ -45,7 +45,7 @@ public class ViewExpiredExceptionExceptionHandler extends ExceptionHandlerWrappe
                     // use in the page
                     requestMap.put("currentViewId", vee.getViewId());
  
-                    nav.handleNavigation(fc, null, "viewExpired");
+                    nav.handleNavigation(fc, null, "error");
                     fc.renderResponse();
  
                 } finally {

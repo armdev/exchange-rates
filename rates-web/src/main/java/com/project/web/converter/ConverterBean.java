@@ -44,7 +44,7 @@ public class ConverterBean implements Serializable {
     private FacesContext context = null;
     private ExternalContext externalContext = null;
 
-    private List<Currency> currencyList = new ArrayList<>();
+    private List<String> currencyList = new ArrayList<>();
 
     private String currencyFirst;
     private String currencySecond;
@@ -56,10 +56,12 @@ public class ConverterBean implements Serializable {
       getCurrencyList();
     }
 
-    public List<Currency> getCurrencyList() {
+    public List<String> getCurrencyList() {
         LOG.info("LIST SIZE " + applicationManager.getDictionaryService().findCurrencyList().size());
-       
-        return applicationManager.getDictionaryService().findCurrencyList();
+        applicationManager.getDictionaryService().findCurrencyList().forEach((c) -> {
+            currencyList.add(c.getCurrency());
+        });       
+        return currencyList;
     }
 
   
