@@ -14,19 +14,19 @@ import net.sf.ehcache.CacheException;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
 
-
 @ApplicationScoped
 @ManagedBean(eager = true)
 @Setter
 @Getter
 public class CacheHandler implements Serializable {
 
+    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CacheHandler.class);
     private static final long serialVersionUID = 8163039174281168443L;
 
     private CacheManager manager;
-    @Setter  
+    @Setter
     private Cache liveCache;
-    @Setter    
+    @Setter
     private Cache historicalCache;
 
     public CacheHandler() {
@@ -57,6 +57,8 @@ public class CacheHandler implements Serializable {
         if (this.liveCache == null) {
             this.liveCache = this.manager.getCache("live.cache");
         }
+        LOG.info("PUTTING CACHE " +key);
+        LOG.info("PUTTING CACHE " +value.toString());
         liveCache.put(new Element(key, value));
         liveCache.flush();
         return true;
@@ -64,10 +66,10 @@ public class CacheHandler implements Serializable {
 
     public Object getLiveCache(String key) {
         try {
-            if (this.historicalCache == null) {
-                this.historicalCache = this.manager.getCache("live.cache");
+            if (this.liveCache == null) {
+                this.liveCache = this.manager.getCache("live.cache");
             }
-            Element elem = this.historicalCache.get(key);
+            Element elem = this.liveCache.get(key);
             if ((elem != null) && (elem.getObjectValue() != null)) {
 
                 return elem.getObjectValue();
