@@ -14,10 +14,12 @@ build:
   stage: build
   script:
     - "cd rates-backend"
-    - "mvn clean package -B -Dmaven.test.skip=true"
+    - "mvn clean package -U -Dmaven.test.skip=true"
+    - "ls -al "
     - "cd .."
     - "cd rates-web"
-    - "mvn clean package -U assembly:assembly -DdescriptorId=../rates-backend/target/rates-backend-1.0-SNAPSHOT.jar -Dmaven.test.skip=true"
+    - "mvn install:install-file -Dfile=../rates-backend/target/rates-backend-1.0-SNAPSHOT.jar package -U -Dmaven.test.skip=true"
+    #- "mvn clean package -U -Dmaven.test.skip=true"
   artifacts:
       paths:
         - "rates-backend/target/rates-backend-1.0-SNAPSHOT.jar"
@@ -26,6 +28,5 @@ build:
 test:
   stage: test
   script:
-    #- "mvn org.jacoco:jacoco-maven-plugin:prepare-agent install -Pcoverage-per-test -B"
     - ls -al
   allow_failure: false
