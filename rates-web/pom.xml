@@ -30,36 +30,36 @@
         <taglibs.version>1.1.2</taglibs.version>
     </properties>  
     <dependencies>     
-          <dependency> 
-      <groupId>org.glassfish</groupId>  
-      <artifactId>javax.faces</artifactId>  
-      <version>2.2.14</version> 
-    </dependency>  
-    <dependency> 
-      <groupId>javax.servlet</groupId>  
-      <artifactId>servlet-api</artifactId>  
-      <version>2.5</version> 
-    </dependency>  
-    <dependency> 
-      <groupId>javax.servlet.jsp</groupId>  
-      <artifactId>jsp-api</artifactId>  
-      <version>2.1</version> 
-    </dependency>  
-    <dependency> 
-      <groupId>org.apache.commons</groupId>  
-      <artifactId>commons-io</artifactId>  
-      <version>1.3.2</version> 
-    </dependency>  
-    <dependency> 
-      <groupId>commons-fileupload</groupId>  
-      <artifactId>commons-fileupload</artifactId>  
-      <version>1.3.2</version> 
-    </dependency>  
-    <dependency> 
-      <groupId>commons-beanutils</groupId>  
-      <artifactId>commons-beanutils</artifactId>  
-      <version>1.9.2</version> 
-    </dependency>    
+        <dependency> 
+            <groupId>org.glassfish</groupId>  
+            <artifactId>javax.faces</artifactId>  
+            <version>2.2.14</version> 
+        </dependency>  
+        <dependency> 
+            <groupId>javax.servlet</groupId>  
+            <artifactId>servlet-api</artifactId>  
+            <version>2.5</version> 
+        </dependency>  
+        <dependency> 
+            <groupId>javax.servlet.jsp</groupId>  
+            <artifactId>jsp-api</artifactId>  
+            <version>2.1</version> 
+        </dependency>  
+        <dependency> 
+            <groupId>org.apache.commons</groupId>  
+            <artifactId>commons-io</artifactId>  
+            <version>1.3.2</version> 
+        </dependency>  
+        <dependency> 
+            <groupId>commons-fileupload</groupId>  
+            <artifactId>commons-fileupload</artifactId>  
+            <version>1.3.2</version> 
+        </dependency>  
+        <dependency> 
+            <groupId>commons-beanutils</groupId>  
+            <artifactId>commons-beanutils</artifactId>  
+            <version>1.9.2</version> 
+        </dependency>    
         <dependency> 
             <groupId>com.googlecode.json-simple</groupId>  
             <artifactId>json-simple</artifactId>  
@@ -101,7 +101,7 @@
             <artifactId>all-themes</artifactId>  
             <version>${org.primefaces.themes}</version> 
         </dependency>  
-<!--        <dependency> 
+        <!--        <dependency> 
             <groupId>org.apache.myfaces.core</groupId>  
             <artifactId>myfaces-api</artifactId>  
             <version>${jsf.version}</version>
@@ -196,7 +196,26 @@
                     </execution> 
                 </executions> 
             </plugin>  
-           
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.0.2</version>  
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.20</version>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.7.9</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.4</version>
+            </plugin>
         </plugins> 
     </build>  
     <repositories> 
