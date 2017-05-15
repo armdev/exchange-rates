@@ -13,7 +13,14 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 @JsonPropertyOrder({
     "USDUSD",
-    "USDEUR"
+    "USDEUR",
+    "USDAMD",
+    "USDCBP",
+    "USDNZD",
+    "USDJPY",
+    "USDHUF",
+    "USDZWD",
+    "USDCAD"
 })
 public class Quotes {
 
@@ -21,6 +28,23 @@ public class Quotes {
     private Integer uSDUSD;
     @JsonProperty("USDEUR")
     private Double uSDEUR;
+    @JsonProperty("USDAMD")
+    private Double uSDAMD;
+    @JsonProperty("USDCBP")
+    private Double uSDCBP;
+    @JsonProperty("USDNZD")
+    private Double uSDNZD;
+    @JsonProperty("USDAUD")
+    private Double uSDAUD;
+    @JsonProperty("USDJPY")
+    private Double uSDJPY;
+    @JsonProperty("USDHUF")
+    private Double uSDHUF;
+    @JsonProperty("USDZWD")
+    private Double uSDZWD;
+    @JsonProperty("USDCAD")
+    private Double uSDCAD;
+
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<>();
 
@@ -42,8 +66,75 @@ public class Quotes {
     @JsonProperty("USDEUR")
     public void setUSDEUR(Double uSDEUR) {
         this.uSDEUR = uSDEUR;
+    }   
+
+
+    public Double getUSDAMD() {
+        return uSDAMD;
     }
 
+    public void setUSDAMD(Double uSDAMD) {
+        this.uSDAMD = uSDAMD;
+    }
+
+    public Double getUSDCBP() {
+        return uSDCBP;
+    }
+
+    public void setUSDCBP(Double uSDCBP) {
+        this.uSDCBP = uSDCBP;
+    }
+
+    public Double getUSDNZD() {
+        return uSDNZD;
+    }
+
+    public void setUSDNZD(Double uSDNZD) {
+        this.uSDNZD = uSDNZD;
+    }
+
+    public Double getUSDAUD() {
+        return uSDAUD;
+    }
+
+    public void setUSDAUD(Double uSDAUD) {
+        this.uSDAUD = uSDAUD;
+    }
+
+    public Double getUSDJPY() {
+        return uSDJPY;
+    }
+
+    public void setUSDJPY(Double uSDJPY) {
+        this.uSDJPY = uSDJPY;
+    }
+
+    public Double getUSDHUF() {
+        return uSDHUF;
+    }
+
+    public void setUSDHUF(Double uSDHUF) {
+        this.uSDHUF = uSDHUF;
+    }
+
+    public Double getUSDZWD() {
+        return uSDZWD;
+    }
+
+    public void setUSDZWD(Double uSDZWD) {
+        this.uSDZWD = uSDZWD;
+    }
+
+    public Double getUSDCAD() {
+        return uSDCAD;
+    }
+
+    public void setUSDCAD(Double uSDCAD) {
+        this.uSDCAD = uSDCAD;
+    }
+
+    
+    
     @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
         return this.additionalProperties;

@@ -1,6 +1,8 @@
 package com.project.web.converter;
 
 import com.project.web.handlers.SessionContext;
+import com.project.web.rest.RESTClientBean;
+import com.project.web.rest.ResponseModel;
 
 import com.project.web.service.ApplicationManager;
 
@@ -33,6 +35,10 @@ public class ConverterBean implements Serializable {
     @ManagedProperty("#{applicationManager}")
     @Setter
     private ApplicationManager applicationManager = null;
+
+    @ManagedProperty("#{restClient}")
+    @Setter
+    private RESTClientBean restClient = null;
     @ManagedProperty("#{i18n}")
     @Setter
     private ResourceBundle bundle = null;
@@ -48,14 +54,30 @@ public class ConverterBean implements Serializable {
     @Setter
     @Getter
     private String currencySecond;
+    @Setter
+    @Getter
+    private double amount = 1d;
+    @Setter
+    @Getter
+    private double rate = 0l;
 
     @PostConstruct
     public void init() {
         context = FacesContext.getCurrentInstance();
-        externalContext = context.getExternalContext();     
+        externalContext = context.getExternalContext();
         applicationManager.getDictionaryService().findCurrencyList().forEach((c) -> {
             currencyList.add(c.getCurrency());
         });
+    }
+    //http://apilayer.net/api/live?access_key=f4446d2499d427eca4efee698b587c1e&currencies=AMD,EUR,CAD&format=1
+
+    public void doAction() {
+        ResponseModel model = restClient.getLiveRates(currencyFirst, currencyFirst);
+        System.out.println(model.toString());
+        if (model.getQuotes() != null) {
+            rate = model.getQuotes().getUSDEUR();
+            amount = model.getQuotes().getUSDUSD();
+        }
     }
 
     public List<String> getCurrencyList() {

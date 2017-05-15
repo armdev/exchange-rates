@@ -20,6 +20,8 @@ import org.codehaus.jackson.map.ObjectMapper;
 @ManagedBean(eager = true, name = "restClient")
 @ApplicationScoped
 public class RESTClientBean implements Serializable {
+    
+    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(RESTClientBean.class);
 
     private static final long serialVersionUID = 1L;
 
@@ -40,15 +42,16 @@ public class RESTClientBean implements Serializable {
         CloseableHttpClient CLIENT = HttpClients.createDefault();
         ResponseModel model = new ResponseModel();
         try {
-            HttpGet request = new HttpGet(SERVICE_PATH + "live?ccess_key=" + ACCESS_KEY + "&currencies=" + firstCurrency + "," + secondCurrency + "&format=1");
+            LOG.info("firstCurrency " +firstCurrency);
+            LOG.info("secondCurrency " +secondCurrency);
+            HttpGet request = new HttpGet(SERVICE_PATH + "live?access_key=" + ACCESS_KEY + "&currencies=" + firstCurrency + "," + secondCurrency + "&format=1");
             request.addHeader("charset", "UTF-8");
             HttpResponse response = CLIENT.execute(request);
             response.addHeader("content-type", "application/json;charset=UTF-8");
             HttpEntity entity = response.getEntity();
             ObjectMapper mapper = new ObjectMapper();
-
             model = mapper.readValue(EntityUtils.toString(entity), ResponseModel.class);
-            System.out.println(model.toString());
+          
         } catch (IOException | ParseException ex) {
             try {
                 CLIENT.close();

@@ -30,10 +30,12 @@
                                 </h:selectOneMenu>
                                 
                                 <h:outputLabel for="amount" value="Amount "/>
-                                <h:inputText value=""/>
+                                <h:inputText value="#{rateConverterBean.amount}"/>
                                 
                                 <h:outputLabel for="rate" value="Rate "/>
-                                <h:inputText value=""/>
+                                <h:inputText value="#{rateConverterBean.rate}"/>
+                                
+                                <h:commandButton value="Convert" styleClass="btn btn-lg btn-primary" action="#{rateConverterBean.doAction()}"/>
                                 
                                 
                             </p:panelGrid>
