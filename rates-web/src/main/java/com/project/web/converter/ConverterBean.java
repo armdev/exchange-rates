@@ -28,7 +28,7 @@ import lombok.Setter;
  * @author armdev
  */
 @ManagedBean(name = "rateConverterBean")
-@ViewScoped
+@SessionScoped
 @NoArgsConstructor
 public class ConverterBean implements Serializable {
 
@@ -77,6 +77,7 @@ public class ConverterBean implements Serializable {
         ResponseModel model = restClient.getLiveRates(currencyFirst);
         System.out.println(model.toString());
         if (model.getQuotes() != null) {
+            sessionContext.setRate(0);
             if (currencyFirst.equalsIgnoreCase("EUR")) {
                 rate = model.getQuotes().getUSDEUR();
             } else if (currencyFirst.equalsIgnoreCase("AMD")) {
@@ -104,6 +105,7 @@ public class ConverterBean implements Serializable {
             sessionContext.setRate(rate);
             if (model.getQuotes().getUSDUSD() != null) {               
                  rate = amount * model.getQuotes().getUSDUSD();
+                 amount = 1;
             }
         }
     }
