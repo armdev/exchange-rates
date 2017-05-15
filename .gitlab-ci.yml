@@ -20,7 +20,7 @@ build:
     - "mvn clean package -U assembly:assembly -DdescriptorId=../rates-backend/target/rates-backend-1.0-SNAPSHOT.jar -Dmaven.test.skip=true"
   artifacts:
       paths:
-    - "rates-backend/target/rates-backend-1.0-SNAPSHOT.jar"
+        - "rates-backend/target/rates-backend-1.0-SNAPSHOT.jar"
   allow_failure: false
 
 test:
