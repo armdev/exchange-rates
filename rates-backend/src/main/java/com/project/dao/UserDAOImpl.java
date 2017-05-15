@@ -26,22 +26,22 @@ public class UserDAOImpl extends AbstractDao implements UserDAO {
     }
 
     @Override
-    public User userLogin(String email, String password) {
-        User entity = null;
-        try {
-            Query query = getSession().createQuery("SELECT c FROM User c WHERE c.email=:email AND c.passwd=:passwd")
-                    .setParameter("email", email)
-                    .setParameter("passwd", HashUtils.hashPassword(password));
+public User userLogin(String email, String password) {
+    User entity = null;
+    try {
+        Query query = getSession().createQuery("SELECT c FROM User c WHERE c.email=:email AND c.passwd=:passwd")
+                .setParameter("email", email)
+                .setParameter("passwd", HashUtils.hashPassword(password));
 
-            if (query.uniqueResult() != null) {
-                entity = (User) query.uniqueResult();
-            }
-
-        } catch (Exception e) {
-            System.out.println("No result, method login " + e.getLocalizedMessage());
+        if (query.uniqueResult() != null) {
+            entity = (User) query.uniqueResult();
         }
-        return entity;
+
+    } catch (Exception e) {
+        System.out.println("No result, method login " + e.getLocalizedMessage());
     }
+    return entity;
+}
 
     @Override
     public Long save(User entity) {
