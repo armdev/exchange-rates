@@ -11,10 +11,15 @@
         <p:tab title="#{i18n.dataManagement}" id="dataManagement"> 
             <h:form>
                 <ul class="nav"> 
+                     <li>
+                        <h:outputLink styleClass="fa fa-arrow-right"  value="#{request.contextPath}/pages/user/live.jsf">
+                           Live Rates
+                        </h:outputLink> 
+                    </li>  
                     
-                       <li>
+                    <li>
                         <h:outputLink styleClass="fa fa-arrow-right"  value="#{request.contextPath}/pages/user/profile.jsf">
-                            Exchange Converter
+                            Currency Converter
                         </h:outputLink> 
                     </li>  
 

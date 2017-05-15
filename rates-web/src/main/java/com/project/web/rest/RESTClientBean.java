@@ -1,13 +1,15 @@
 package com.project.web.rest;
 
+import com.project.web.service.ApplicationManager;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import lombok.Setter;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.ParseException;
@@ -20,14 +22,20 @@ import org.codehaus.jackson.map.ObjectMapper;
 @ManagedBean(eager = true, name = "restClient")
 @ApplicationScoped
 public class RESTClientBean implements Serializable {
-    
+
     private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(RESTClientBean.class);
 
     private static final long serialVersionUID = 1L;
 
+    @ManagedProperty("#{applicationManager}")
+    @Setter
+    private ApplicationManager applicationManager = null;
+
     private final String SERVICE_PATH = "http://apilayer.net/api/";
 
     private final String ACCESS_KEY = "f4446d2499d427eca4efee698b587c1e";
+
+    private final String CURRENCIES = StringUtils.join(applicationManager.getCurrencyList(), ',');
 
     public RESTClientBean() {
 
@@ -42,14 +50,42 @@ public class RESTClientBean implements Serializable {
         CloseableHttpClient CLIENT = HttpClients.createDefault();
         ResponseModel model = new ResponseModel();
         try {
-            LOG.info("firstCurrency " +firstCurrency);            
+            LOG.info("firstCurrency " + firstCurrency);
+            HttpGet request = new HttpGet(SERVICE_PATH + "live?access_key=" + ACCESS_KEY + "&currencies=" + CURRENCIES + "&format=1");
+            request.addHeader("charset", "UTF-8");
+            HttpResponse response = CLIENT.execute(request);
+            response.addHeader("content-type", "application/json;charset=UTF-8");
+            HttpEntity entity = response.getEntity();
+            ObjectMapper mapper = new ObjectMapper();
+            model = mapper.readValue(EntityUtils.toString(entity), ResponseModel.class);
+        } catch (IOException | ParseException ex) {
+            try {
+                CLIENT.close();
+            } catch (IOException ex1) {
+                java.util.logging.Logger.getLogger(RESTClientBean.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        } finally {
+            try {
+                CLIENT.close();
+            } catch (IOException ex1) {
+                java.util.logging.Logger.getLogger(RESTClientBean.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        }
+        return model;
+    }
+
+    public ResponseModel getConvertRates(String firstCurrency) {
+        CloseableHttpClient CLIENT = HttpClients.createDefault();
+        ResponseModel model = new ResponseModel();
+        try {
+            LOG.info("firstCurrency " + firstCurrency);
             HttpGet request = new HttpGet(SERVICE_PATH + "live?access_key=" + ACCESS_KEY + "&currencies=" + firstCurrency + "&format=1");
             request.addHeader("charset", "UTF-8");
             HttpResponse response = CLIENT.execute(request);
             response.addHeader("content-type", "application/json;charset=UTF-8");
             HttpEntity entity = response.getEntity();
             ObjectMapper mapper = new ObjectMapper();
-            model = mapper.readValue(EntityUtils.toString(entity), ResponseModel.class);          
+            model = mapper.readValue(EntityUtils.toString(entity), ResponseModel.class);
         } catch (IOException | ParseException ex) {
             try {
                 CLIENT.close();

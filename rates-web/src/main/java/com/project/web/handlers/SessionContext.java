@@ -23,7 +23,7 @@ public class SessionContext implements Serializable {
     private User user = new User();
     @Setter
     @Getter
-    private double rate = 1d;
+    private double rate = 0d;
     @Setter
     @Getter
     private Integer activeIndex = 0;

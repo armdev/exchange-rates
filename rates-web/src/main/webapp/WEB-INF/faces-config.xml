@@ -18,17 +18,13 @@
     </application>
     <application>
         <locale-config>
-            <default-locale>en</default-locale>                
-            <supported-locale>en_EN</supported-locale>            
+            <default-locale>en</default-locale>               
         </locale-config>    
         <resource-bundle>
             <base-name>i18n</base-name>
             <var>i18n</var>        
         </resource-bundle>
-        <resource-bundle>
-            <base-name>file</base-name>
-            <var>file</var>        
-        </resource-bundle>
+      
         <resource-bundle>
             <base-name>access</base-name>
             <var>accessProp</var>

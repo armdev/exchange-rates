@@ -3,9 +3,7 @@ package com.project.web.converter;
 import com.project.web.handlers.SessionContext;
 import com.project.web.rest.RESTClientBean;
 import com.project.web.rest.ResponseModel;
-
 import com.project.web.service.ApplicationManager;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,13 +13,12 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  *
@@ -67,14 +64,12 @@ public class ConverterBean implements Serializable {
     public void init() {
         context = FacesContext.getCurrentInstance();
         externalContext = context.getExternalContext();
-        applicationManager.getDictionaryService().findCurrencyList().forEach((c) -> {
-            currencyList.add(c.getCurrency());
-        });
+
     }
     //http://apilayer.net/api/live?access_key=f4446d2499d427eca4efee698b587c1e&currencies=AMD,EUR,CAD&format=1
 
     public void doAction() {
-        ResponseModel model = restClient.getLiveRates(currencyFirst);
+        ResponseModel model = restClient.getConvertRates(currencyFirst);
         System.out.println(model.toString());
         if (model.getQuotes() != null) {
             sessionContext.setRate(0);
@@ -101,24 +96,24 @@ public class ConverterBean implements Serializable {
             } else {
                 rate = 0d;
             }
-            
+
             sessionContext.setRate(rate);
-            if (model.getQuotes().getUSDUSD() != null) {               
-                 rate = amount * model.getQuotes().getUSDUSD();
-                 amount = 1;
+            if (model.getQuotes().getUSDUSD() != null) {
+                rate = amount * model.getQuotes().getUSDUSD();
+                amount = 1;
             }
         }
     }
 
     public void handleBlurEvent() {
-        LOG.info("Amount " +amount);
-        LOG.info("Rate " +sessionContext.getRate());
+
+        LOG.info("Rate " + sessionContext.getRate());
         rate = amount * sessionContext.getRate();
-        LOG.info("Final Rate " +sessionContext.getRate());
+        LOG.info("Final Rate " + sessionContext.getRate());
     }
 
-    public List<String> getCurrencyList() {
-        return currencyList;
+    public List<String> getCurrencyList() {      
+        return applicationManager.getCurrencyList();
     }
 
     public void addMessage(FacesMessage message) {
