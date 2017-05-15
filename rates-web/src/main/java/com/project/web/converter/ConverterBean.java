@@ -96,12 +96,12 @@ public class ConverterBean implements Serializable {
             } else {
                 rate = 0d;
             }
-
+            amount = 1;
             sessionContext.setRate(rate);
-            if (model.getQuotes().getUSDUSD() != null) {
-                rate = amount * model.getQuotes().getUSDUSD();
-                amount = 1;
-            }
+           // if (model.getQuotes().getUSDUSD() != null) {
+            //    rate = amount * model.getQuotes().getUSDUSD();
+
+           // }
         }
     }
 
@@ -112,7 +112,7 @@ public class ConverterBean implements Serializable {
         LOG.info("Final Rate " + sessionContext.getRate());
     }
 
-    public List<String> getCurrencyList() {      
+    public List<String> getCurrencyList() {
         return applicationManager.getCurrencyList();
     }
 

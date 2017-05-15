@@ -19,7 +19,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.codehaus.jackson.map.ObjectMapper;
 
-@ManagedBean(eager = true, name = "restClient")
+@ManagedBean(eager = false, name = "restClient")
 @ApplicationScoped
 public class RESTClientBean implements Serializable {
 
@@ -34,9 +34,7 @@ public class RESTClientBean implements Serializable {
     private final String SERVICE_PATH = "http://apilayer.net/api/";
 
     private final String ACCESS_KEY = "f4446d2499d427eca4efee698b587c1e";
-
-    private final String CURRENCIES = StringUtils.join(applicationManager.getCurrencyList(), ',');
-
+   
     public RESTClientBean() {
 
     }
@@ -50,8 +48,9 @@ public class RESTClientBean implements Serializable {
         CloseableHttpClient CLIENT = HttpClients.createDefault();
         ResponseModel model = new ResponseModel();
         try {
+            String currencies = StringUtils.join(applicationManager.getCurrencyList(), ',');
             LOG.info("firstCurrency " + firstCurrency);
-            HttpGet request = new HttpGet(SERVICE_PATH + "live?access_key=" + ACCESS_KEY + "&currencies=" + CURRENCIES + "&format=1");
+            HttpGet request = new HttpGet(SERVICE_PATH + "live?access_key=" + ACCESS_KEY + "&currencies=" + currencies + "&format=1");
             request.addHeader("charset", "UTF-8");
             HttpResponse response = CLIENT.execute(request);
             response.addHeader("content-type", "application/json;charset=UTF-8");
