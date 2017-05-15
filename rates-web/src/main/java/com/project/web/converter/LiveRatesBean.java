@@ -25,7 +25,7 @@ import lombok.Setter;
  * @author armdev
  */
 @ManagedBean(eager = true, name = "liveRatesBean")
-@SessionScoped
+@ViewScoped
 @NoArgsConstructor
 public class LiveRatesBean implements Serializable {
 
@@ -65,18 +65,21 @@ public class LiveRatesBean implements Serializable {
     public void init() {
         context = FacesContext.getCurrentInstance();
         externalContext = context.getExternalContext();
-        responseModel = (ResponseModel) cacheHandler.getLiveCache(sessionContext.getUser().getId().toString());
+        responseModel = (ResponseModel) cacheHandler.getLiveCache(sessionContext.getUser().getEmail());
         if (responseModel == null) {
-            LOG.info("Loading response model from API");
+            LOG.info("@@@@@Loading response model from API");
             responseModel = restClient.getLiveRates();
-
-            cacheHandler.putLiveCache(sessionContext.getUser().getId().toString(), responseModel);
+            cacheHandler.putLiveCache(sessionContext.getUser().getEmail(), responseModel);
         } else {
-            LOG.info("Loading response model from cache");
+            LOG.info("@@@@@Loading response model from cache");
         }
         if (responseModel.getTimestamp() != null) {
             timeStamp = new java.util.Date((long) responseModel.getTimestamp() * 1000);
         }
+    }
+    
+    public void calllistener(){
+         LOG.info("@@@@@Listsner called");
     }
 
 }
