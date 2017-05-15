@@ -74,7 +74,9 @@ public class LiveRatesBean implements Serializable {
             LOG.info("@@@@@Loading response model from cache");
         }
         if (responseModel.getTimestamp() != null) {
+             
             timeStamp = new java.util.Date((long) responseModel.getTimestamp() * 1000);
+            LOG.info("@@@@@PUT NEW TIMESTAMP " +timeStamp);
         }
     }
     
