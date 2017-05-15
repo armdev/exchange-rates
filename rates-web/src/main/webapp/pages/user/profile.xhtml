@@ -18,7 +18,7 @@
                         <p:outputPanel autoUpdate="true">
                             <h1>Convert Currencies</h1>
                             <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank form-group">                             
-                                    <h:outputLabel for="amountId" value="USD Amount"  rendered="#{sessionContext.rate > 0}"/>                                                                
+                                    <h:outputLabel for="amountId" value="USD Amount"  rendered="#{sessionContext.rate != 0}"/>                                                                
                                     <p:inputText id="amountId" value="#{rateConverterBean.amount}" rendered="#{sessionContext.rate > 0}">
                                         <p:ajax event="keyup" update="rate" listener="#{rateConverterBean.handleBlurEvent()}" />
                                         <f:convertNumber minFractionDigits="2" maxFractionDigits="2" pattern="#0.000"/>
@@ -27,8 +27,8 @@
                                     <h:selectOneMenu styleClass="form-control"   id="currencySecond" value="#{rateConverterBean.currencyFirst}" style="width: 130px;">                            
                                         <f:selectItems value="#{rateConverterBean.currencyList}" itemLabel="#{list}" var="list"  itemValue="#{list}"/>                         
                                     </h:selectOneMenu>
-                                    <h:outputLabel for="rate" value="Current Rate "/>
-                                    <p:inputText id="rate" value="#{rateConverterBean.rate}">
+                                    <h:outputLabel for="rate" value="Current Rate " rendered="#{sessionContext.rate != 0}"/>
+                                    <p:inputText id="rate" value="#{rateConverterBean.rate}" rendered="#{sessionContext.rate != 0}">
                                         <f:convertNumber minFractionDigits="2" maxFractionDigits="2" pattern="#0.000"/>
                                     </p:inputText>                                
                                 <h:commandButton value="Convert" styleClass="btn btn-lg btn-primary" action="#{rateConverterBean.doAction()}"/>                               

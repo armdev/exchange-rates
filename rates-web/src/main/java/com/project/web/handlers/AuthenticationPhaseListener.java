@@ -76,9 +76,11 @@ public class AuthenticationPhaseListener implements PhaseListener {
 
             if (permissions != null) {
                 LOG.info("permissions.contains(\"LOGGED\") " + !permissions.contains("LOGGED"));
-                LOG.info("viewId " + viewId.toString());                                
-                if (sessionContext.getUser().getId() == null && !viewId.contains("index.xhtml") || !permissions.contains("LOGGED")) {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(ex.getRequestContextPath() + "/index.jsf?illegalAccess");
+                LOG.info("viewId " + viewId.toString());
+                if (sessionContext.getUser() != null) {
+                    if (sessionContext.getUser().getId() == null && !viewId.contains("index.xhtml") || !permissions.contains("LOGGED")) {
+                        FacesContext.getCurrentInstance().getExternalContext().redirect(ex.getRequestContextPath() + "/index.jsf?illegalAccess");
+                    }
                 }
             }
 
