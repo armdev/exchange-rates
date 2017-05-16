@@ -49,6 +49,8 @@ mysql_build:
 maven-build:
   image: maven:3.3.9-jdk-8
   stage: build
+  dependencies:
+  - mysql_build
   script:
     - "mvn clean package -B -Dmaven.test.skip=false"
     - "ls -al"  
