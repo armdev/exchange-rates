@@ -19,9 +19,9 @@ import net.sf.ehcache.Element;
 @ManagedBean(eager = true)
 @Setter
 @Getter
-public class CacheHandler implements Serializable {
+public class RateCacheBean implements Serializable {
 
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CacheHandler.class);
+    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(RateCacheBean.class);
     private static final long serialVersionUID = 8163039174281168443L;
 
     private CacheManager manager;
@@ -30,7 +30,7 @@ public class CacheHandler implements Serializable {
     @Setter
     private Cache historicalCache;
 
-    public CacheHandler() {
+    public RateCacheBean() {
     }
 
     @PreDestroy

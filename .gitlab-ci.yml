@@ -3,26 +3,40 @@ image: maven:3.3.9-jdk-8
 stages:
   - build
   - test
+  - deploy
+  - deliver
 
-cache:
-  key: ${CI_BUILD_NAME}
-  paths:
-  - rates-backend/
-  - rates-web/
+#cache:
+ # key: ${CI_BUILD_NAME}
+  #paths:
+  #- rates-backend/
+  #- rates-web/
   
 build:
   stage: build
   script:
-    - "mvn clean package -U -Dmaven.test.skip=true"
-    - "ls -al"
-    #- "mvn install:install-file -Dfile=rates-web/ehcache-core-2.1.0.jar, rates-web/ehcache-terracotta-2.1.0.jar, rates-backend/target/rates-backend-1.0-SNAPSHOT.jar  package -U -Dmaven.test.skip=true"    
+    - "mvn clean package -B -Dmaven.test.skip=true"
+    - "ls -al"  
   artifacts:
         paths:
         - "rates-backend/target/rates-backend-1.0-SNAPSHOT.jar"      
-  allow_failure: true
+  allow_failure: false
 
 test:
   stage: test
   script:
     - ls -al
   allow_failure: false
+
+deploy:
+  stage: deploy
+  script: "echo deploy started"
+  only:
+    - master
+
+deliver:
+  stage: deliver
+  script: "echo Delivery started"
+  only:
+    - master
+ 

@@ -212,9 +212,9 @@
                     <configuration>
                         <encoding>${project.build.sourceEncoding}</encoding>
                     </configuration>  
-                    <!--                    <compilerArguments> 
+                    <compilerArguments> 
                         <endorseddirs>${endorsed.dir}</endorseddirs> 
-                    </compilerArguments> -->
+                    </compilerArguments> 
                 </configuration> 
             </plugin>  
             <plugin> 

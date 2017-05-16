@@ -1,6 +1,6 @@
 package com.project.web.converter;
 
-import com.project.web.handlers.CacheHandler;
+import com.project.web.handlers.RateCacheBean;
 import com.project.web.handlers.SessionContext;
 import com.project.web.rest.RESTClientBean;
 import com.project.web.rest.ResponseModel;
@@ -46,9 +46,9 @@ public class LiveRatesBean implements Serializable {
     @Setter
     private SessionContext sessionContext = null;
 
-    @ManagedProperty("#{cacheHandler}")
+    @ManagedProperty("#{rateCacheBean}")
     @Setter
-    private CacheHandler cacheHandler = null;
+    private RateCacheBean cacheHandler = null;
 
     private FacesContext context = null;
     private ExternalContext externalContext = null;
