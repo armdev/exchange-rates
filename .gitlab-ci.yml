@@ -1,5 +1,5 @@
 image: maven:3.3.9-jdk-8
-
+#dostiharise/ubuntu-java-mysql
 stages:
   - build
   - deploy
@@ -19,7 +19,7 @@ project_build:
   variables:
     MYSQL_DATABASE: rates
     MYSQL_ROOT_PASSWORD: root
-  image: mysql,maven:3.3.9-jdk-8    
+  image: mysql maven:3.3.9-jdk-8    
   before_script:
   - mysql --version
   script:
