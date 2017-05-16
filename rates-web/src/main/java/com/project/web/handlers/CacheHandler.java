@@ -79,7 +79,6 @@ public class CacheHandler implements Serializable {
                 return elem.getObjectValue();
             }
         } catch (ClassCastException | IllegalStateException | CacheException e) {
-            e.printStackTrace();
         }
         return null;
     }
