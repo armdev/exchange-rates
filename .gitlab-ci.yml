@@ -27,7 +27,9 @@ docker-build:
   image: docker
   script:
    - "docker run --name rates-mysql -p 3306-3306:3306-3306 -e MYSQL_ROOT_PASSWORD=root -d mysql"
+   - "chmod 777 /var/run/mysqld/mysqld.sock"
    - "docker exec -i rates-mysql mysql -uroot -proot -e 'create database rates'"
+   - "docker exec -i rates-mysql mysql -uroot -proot rates < db/rates_db.sql"
 
 maven-build:
   image: maven:3.3.9-jdk-8
