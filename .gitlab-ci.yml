@@ -7,14 +7,14 @@ stages:
   - deliver
 
 services:
-  - mysql:latest
+  #- mysql:latest
   - docker:dind
   
-variables:
-  # Configure mysql environment variables (https://hub.docker.com/r/_/mysql/)
-  MYSQL_DATABASE: root
-  MYSQL_ROOT_PASSWORD: root
-  DATABASE_URL: "jdbc:mysql://localhost:3306/rates"
+# variables:
+#   # Configure mysql environment variables (https://hub.docker.com/r/_/mysql/)
+#   MYSQL_DATABASE: root
+#   MYSQL_ROOT_PASSWORD: root
+#   DATABASE_URL: "jdbc:mysql://localhost:3306/rates"
   
 cache:
   key: ${CI_BUILD_NAME}
@@ -39,10 +39,7 @@ maven-build:
         paths:
         - "rates-backend/target/rates-backend-1.0-SNAPSHOT.jar"      
   allow_failure: false
-  artifacts:
-    paths:
-      - target/*.jar
-   
+  
    
 # connect:
 #   image: mysql
