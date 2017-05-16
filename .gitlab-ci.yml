@@ -1,9 +1,9 @@
-image: maven:3.3.9-jdk-8
+
+image: docker:latest
 
 stages:
   #- connect
   - build
-  - test
   - deploy
   - deliver
 
@@ -23,34 +23,36 @@ cache:
    - rates-backend/
    - rates-web/
    
-   
-# connect:
-#   image: mysql
-#   script:
-#     - echo "create database rates" | mysql -u root username -p root
-
-  
-build:
+docker-build:
   stage: build
   script:
-    - "docker run --name rates-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -d mysql"
-    - "docker exec -i rates-mysql mysql -uroot -proot -e create database rates"
+   - "docker run --name rates-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -d mysql"
+   - "docker exec -i rates-mysql mysql -uroot -proot -e create database rates"
+
+maven-build:
+  image: maven:3.3.9-jdk-8
+  stage: build
+  script:
     - "mvn clean package -B -Dmaven.test.skip=false"
     - "ls -al"  
   artifacts:
         paths:
         - "rates-backend/target/rates-backend-1.0-SNAPSHOT.jar"      
   allow_failure: false
+  artifacts:
+    paths:
+      - target/*.jar
+   
+   
+# connect:
+#   image: mysql
+#   script:
+#     - echo "create database rates" | mysql -u root username -p root
 
-test:
-  stage: test
-  script:
-    - ls -al
-  allow_failure: false
 
 deploy:
   stage: deploy
-  script: "echo deploy started"
+  script: "echo Deploy started"
   only:
     - master
 
