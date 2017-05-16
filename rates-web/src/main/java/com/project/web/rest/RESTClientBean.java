@@ -44,6 +44,35 @@ public class RESTClientBean implements Serializable {
 
     }
 
+    public ResponseModel getHistoricalRates(String date) {
+        date = "2005-02-01";
+        CloseableHttpClient CLIENT = HttpClients.createDefault();
+        ResponseModel model = new ResponseModel();
+        try {
+            String currencies = StringUtils.join(applicationManager.getCurrencyList(), ',');
+            HttpGet request = new HttpGet(SERVICE_PATH + "historical?access_key=" + ACCESS_KEY + "&currencies=" + currencies + "&date=" + date + "&format=1");
+            request.addHeader("charset", "UTF-8");
+            HttpResponse response = CLIENT.execute(request);
+            response.addHeader("content-type", "application/json;charset=UTF-8");
+            HttpEntity entity = response.getEntity();
+            ObjectMapper mapper = new ObjectMapper();
+            model = mapper.readValue(EntityUtils.toString(entity), ResponseModel.class);
+        } catch (IOException | ParseException ex) {
+            try {
+                CLIENT.close();
+            } catch (IOException ex1) {
+                java.util.logging.Logger.getLogger(RESTClientBean.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        } finally {
+            try {
+                CLIENT.close();
+            } catch (IOException ex1) {
+                java.util.logging.Logger.getLogger(RESTClientBean.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        }
+        return model;
+    }
+
     public ResponseModel getLiveRates() {
         CloseableHttpClient CLIENT = HttpClients.createDefault();
         ResponseModel model = new ResponseModel();
