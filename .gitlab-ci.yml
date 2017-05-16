@@ -14,14 +14,14 @@ build:
   stage: build
   script:
     #- "mvn clean package -U -Dmaven.test.skip=true"
-    - "mvn install:install-file -Dfile=ehcache-core-2.1.0.jar,ehcache-terracotta-2.1.0.jar  package -U -Dmaven.test.skip=true"
+    - "mvn install:install-file -Dfile=./ehcache-core-2.1.0.jar, ./ehcache-terracotta-2.1.0.jar  package -U -Dmaven.test.skip=true"
     - "ls -al"
   artifacts:
       paths:
         - "rates-backend/target/rates-backend-1.0-SNAPSHOT.jar"
         - "ehcache-core-2.1.0.jar"
         - "ehcache-terracotta-2.1.0.jar"
-  allow_failure: false
+  allow_failure: true
 
 test:
   stage: test
