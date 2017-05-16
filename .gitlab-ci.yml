@@ -34,8 +34,8 @@ mysql_build:
   - mysql --version
   script:
   - echo "SELECT 'OK';" | mysql --user=root --password="${MYSQL_ROOT_PASSWORD}" --host=mysql "${MYSQL_DATABASE}"
-  - "chmod 777 /var/run/mysqld/mysqld.sock"
-  - "mysql --user=root --password=root rates < db/rates_db.sql"
+  #- "chmod 777 /var/run/mysqld/mysqld.sock"
+  - mysql --user=root --password="${MYSQL_ROOT_PASSWORD}" --host=mysql rates < db/rates_db.sql
    
 # docker-build:
 #   stage: build
