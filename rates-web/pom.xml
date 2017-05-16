@@ -38,11 +38,19 @@
         <commons-beanutils>1.9.2</commons-beanutils>
     </properties>  
     <dependencies>     
-      <dependency>
+        <dependency> 
+            <groupId>net.sf.ehcache</groupId>  
+            <artifactId>ehcache</artifactId>  
+            <version>2.10.4</version>  
+            <scope>system</scope>  
+            <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/ehcache-2.10.4.jar</systemPath> 
+        </dependency>  
+        
+<!--        <dependency>
             <groupId>net.sf.ehcache</groupId>
             <artifactId>ehcache</artifactId>
             <version>2.10.4</version>           
-        </dependency>      
+        </dependency>      -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
