@@ -41,8 +41,7 @@
       <dependency>
             <groupId>net.sf.ehcache</groupId>
             <artifactId>ehcache</artifactId>
-            <version>${net.sf.ehcache}</version>
-             <type>pom</type>
+            <version>2.10.4</version>           
         </dependency>      
         <dependency>
             <groupId>org.apache.commons</groupId>

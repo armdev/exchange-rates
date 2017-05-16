@@ -13,15 +13,12 @@ cache:
 build:
   stage: build
   script:
-    #- "mvn clean package -U -Dmaven.test.skip=true"
+    - "mvn clean package -U -Dmaven.test.skip=true"
     - "ls -al"
-    - "mvn install:install-file -Dfile=rates-web/ehcache-core-2.1.0.jar, rates-web/ehcache-terracotta-2.1.0.jar, rates-backend/target/rates-backend-1.0-SNAPSHOT.jar  package -U -Dmaven.test.skip=true"
-    - "ls -al"
+    #- "mvn install:install-file -Dfile=rates-web/ehcache-core-2.1.0.jar, rates-web/ehcache-terracotta-2.1.0.jar, rates-backend/target/rates-backend-1.0-SNAPSHOT.jar  package -U -Dmaven.test.skip=true"    
   artifacts:
         paths:
-        - "rates-backend/target/rates-backend-1.0-SNAPSHOT.jar"
-        - "ehcache-core-2.1.0.jar"
-        - "ehcache-terracotta-2.1.0.jar"
+        - "rates-backend/target/rates-backend-1.0-SNAPSHOT.jar"      
   allow_failure: true
 
 test:
