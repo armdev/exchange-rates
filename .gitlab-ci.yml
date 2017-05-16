@@ -1,4 +1,3 @@
-
 image: docker:latest
 
 stages:
@@ -27,7 +26,7 @@ docker-build:
   stage: build
   script:
    - "docker run --name rates-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -d mysql"
-   - "docker exec -i rates-mysql mysql -uroot -proot -e create database rates"
+   - docker exec -i rates-mysql mysql -uroot -proot -e "create database rates"
 
 maven-build:
   image: maven:3.3.9-jdk-8
