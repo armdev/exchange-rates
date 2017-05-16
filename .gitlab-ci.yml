@@ -18,7 +18,8 @@ project_build:
   stage: build
   variables:
     MYSQL_DATABASE: rates
-    MYSQL_ROOT_PASSWORD: root  
+    MYSQL_ROOT_PASSWORD: root
+  image: mysql    
   before_script:
   - mysql --version
   script:
