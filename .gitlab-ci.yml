@@ -13,13 +13,9 @@ cache:
 build:
   stage: build
   script:
-    - "cd rates-backend"
     - "mvn clean package -U -Dmaven.test.skip=true"
-    - "ls -al "
-    - "cd .."
-    - "cd rates-web"
-    - "mvn install:install-file -Dfile=../rates-backend/target/rates-backend-1.0-SNAPSHOT.jar package -U -Dmaven.test.skip=true"
-    - "ls -al target/"
+    #- "mvn install:install-file -Dfile=../rates-backend/target/rates-backend-1.0-SNAPSHOT.jar package -U -Dmaven.test.skip=true"
+    - "ls -al"
   artifacts:
       paths:
         - "rates-backend/target/rates-backend-1.0-SNAPSHOT.jar"
