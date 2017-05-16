@@ -18,6 +18,7 @@
                         <p:calendar yearRange="c-20:c" navigator="true" id="birthDate" required="true" mindate="1987-01-01"  pattern="yyyy-MM-dd"  value="#{historicalRatesBean.historical}" >    
                             <p:ajax event="keyup" update="livepanel"/>
                         </p:calendar>
+                        <p:commandButton value="Update" ajax="false"  action="#{historicalRatesBean.init()}"/>    
                         <p:outputPanel autoUpdate="true" id="livepanel">
                             <p:panelGrid style="margin-top:20px"> 
                                 <f:facet name="header">
@@ -38,13 +39,13 @@
                                     </p:row>
                                 </f:facet>
                                 <p:row>
-                                    <p:column colspan="2">#{liveRatesBean.responseModel.quotes.USDEUR}</p:column>
-                                    <p:column colspan="2">#{liveRatesBean.responseModel.quotes.USDAMD}</p:column>                                   
-                                    <p:column colspan="2">#{liveRatesBean.responseModel.quotes.USDNZD}</p:column>
-                                    <p:column colspan="2">#{liveRatesBean.responseModel.quotes.USDJPY}</p:column>
-                                    <p:column colspan="2">#{liveRatesBean.responseModel.quotes.USDHUF}</p:column>                                 
-                                    <p:column colspan="2">#{liveRatesBean.responseModel.quotes.USDCAD}</p:column>
-                                    <p:column colspan="2">#{liveRatesBean.responseModel.quotes.USDAUD}</p:column>
+                                    <p:column colspan="2">#{historicalRatesBean.responseModel.quotes.USDEUR}</p:column>
+                                    <p:column colspan="2">#{historicalRatesBean.responseModel.quotes.USDAMD}</p:column>                                   
+                                    <p:column colspan="2">#{historicalRatesBean.responseModel.quotes.USDNZD}</p:column>
+                                    <p:column colspan="2">#{historicalRatesBean.responseModel.quotes.USDJPY}</p:column>
+                                    <p:column colspan="2">#{historicalRatesBean.responseModel.quotes.USDHUF}</p:column>                                 
+                                    <p:column colspan="2">#{historicalRatesBean.responseModel.quotes.USDCAD}</p:column>
+                                    <p:column colspan="2">#{historicalRatesBean.responseModel.quotes.USDAUD}</p:column>
                                 </p:row>
                             </p:panelGrid>
                         </p:outputPanel>

@@ -3,6 +3,9 @@ package com.project.web.rest;
 import com.project.web.service.ApplicationManager;
 import java.io.IOException;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ApplicationScoped;
@@ -44,13 +47,15 @@ public class RESTClientBean implements Serializable {
 
     }
 
-    public ResponseModel getHistoricalRates(String date) {
-        date = "2005-02-01";
+    public ResponseModel getHistoricalRates(String reportDate) {
+      
+        LOG.info("Received Date is " +reportDate);
+       
         CloseableHttpClient CLIENT = HttpClients.createDefault();
         ResponseModel model = new ResponseModel();
         try {
             String currencies = StringUtils.join(applicationManager.getCurrencyList(), ',');
-            HttpGet request = new HttpGet(SERVICE_PATH + "historical?access_key=" + ACCESS_KEY + "&currencies=" + currencies + "&date=" + date + "&format=1");
+            HttpGet request = new HttpGet(SERVICE_PATH + "historical?access_key=" + ACCESS_KEY + "&currencies=" + currencies + "&date=" + reportDate + "&format=1");
             request.addHeader("charset", "UTF-8");
             HttpResponse response = CLIENT.execute(request);
             response.addHeader("content-type", "application/json;charset=UTF-8");

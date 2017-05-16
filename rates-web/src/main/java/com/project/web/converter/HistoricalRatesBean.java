@@ -6,6 +6,8 @@ import com.project.web.rest.RESTClientBean;
 import com.project.web.rest.ResponseModel;
 import com.project.web.service.ApplicationManager;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
 import javax.annotation.PostConstruct;
@@ -68,13 +70,14 @@ public class HistoricalRatesBean implements Serializable {
         externalContext = context.getExternalContext();
 
         if (historical != null) {
-            LOG.info("@@@@@Historical Date " + historical.toString());
-          //  responseModel = (ResponseModel) cacheHandler.getHistoricalCache(sessionContext.getUser().getEmail() + historical.toString());
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            String reportDate = df.format(historical);
+            LOG.info("@@@@@Historical Date " + reportDate);
+            responseModel = (ResponseModel) cacheHandler.getHistoricalCache(sessionContext.getUser().getEmail() + reportDate);
             if (responseModel == null) {
                 LOG.info("@@@@@Loading response model from API");
-
-                responseModel = restClient.getHistoricalRates(historical.toString());
-               // cacheHandler.putHistoricalCache(sessionContext.getUser().getEmail() + historical.toString(), responseModel);
+               responseModel = restClient.getHistoricalRates(reportDate);
+               cacheHandler.putHistoricalCache(sessionContext.getUser().getEmail() + reportDate, responseModel);
             } else {
                 LOG.info("@@@@@Loading response model from cache");
             }
