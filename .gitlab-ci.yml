@@ -1,4 +1,4 @@
-image: docker:latest
+image: maven:3.3.9-jdk-8
 
 stages:
   - build
@@ -21,7 +21,7 @@ project_build:
     MYSQL_ROOT_PASSWORD: root   
   services:
   - mysql:latest
-  image: mysql, maven:3.3.9-jdk-8
+  image: mysql
   before_script:
   - mysql --version
   script:
