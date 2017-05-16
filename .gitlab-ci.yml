@@ -6,11 +6,11 @@ stages:
   - deploy
   - deliver
 
-#cache:
- # key: ${CI_BUILD_NAME}
-  #paths:
-  #- rates-backend/
-  #- rates-web/
+cache:
+  key: ${CI_BUILD_NAME}
+  paths:
+   - rates-backend/
+   - rates-web/
   
 build:
   stage: build
