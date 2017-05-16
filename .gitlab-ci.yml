@@ -21,15 +21,28 @@ cache:
   paths:
    - rates-backend/
    - rates-web/
-   
-docker-build:
+
+mysql_build:
   stage: build
-  image: docker
+  variables:
+    MYSQL_DATABASE: rates
+    MYSQL_ROOT_PASSWORD: root
+  services:
+  - mysql:latest
+  image: mysql
+  before_script:
+  - mysql --version
   script:
-   - "docker run --name rates-mysql -p 3306-3306:3306-3306 -e MYSQL_ROOT_PASSWORD=root -d mysql"
-   - "chmod 777 /var/run/mysqld/mysqld.sock"
-   - "docker exec -i rates-mysql mysql -uroot -proot -e 'create database rates'"
-   - "docker exec -i rates-mysql mysql -uroot -proot rates < db/rates_db.sql"
+  - echo "SELECT 'OK';" | mysql --user=root --password="${MYSQL_ROOT_PASSWORD}" --host=mysql "${MYSQL_DATABASE}"
+   
+# docker-build:
+#   stage: build
+#   image: docker
+#   script:
+#   - "docker run --name rates-mysql -p 3306-3306:3306-3306 -e MYSQL_ROOT_PASSWORD=root -d mysql"
+#   - "chmod 777 /var/run/mysqld/mysqld.sock"
+#   - "docker exec -i rates-mysql mysql -uroot -proot -e 'create database rates'"
+#   - "docker exec -i rates-mysql mysql -uroot -proot rates < db/rates_db.sql"
 
 maven-build:
   image: maven:3.3.9-jdk-8
