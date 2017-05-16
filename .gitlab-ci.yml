@@ -13,6 +13,7 @@ variables:
   # Configure mysql environment variables (https://hub.docker.com/r/_/mysql/)
   MYSQL_DATABASE: root
   MYSQL_ROOT_PASSWORD: root
+  DATABASE_URL: "jdbc:mysql://localhost:3306/rates"
   
 cache:
   key: ${CI_BUILD_NAME}
@@ -21,15 +22,17 @@ cache:
    - rates-web/
    
    
-connect:
-  image: mysql
-  script:
-    - echo "create database rates" | mysql -u root username -p root
+# connect:
+#   image: mysql
+#   script:
+#     - echo "create database rates" | mysql -u root username -p root
 
   
 build:
   stage: build
   script:
+    - "docker run --name rates-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -d mysql"
+    - "docker exec -i rates-mysql mysql -uroot -proot -e create database rates"
     - "mvn clean package -B -Dmaven.test.skip=false"
     - "ls -al"  
   artifacts:
