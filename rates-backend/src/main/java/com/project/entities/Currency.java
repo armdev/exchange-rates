@@ -10,6 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  *
@@ -17,6 +23,12 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "currency")
+@Setter
+@Getter
+@AllArgsConstructor()
+@EqualsAndHashCode
+@ToString
+@NoArgsConstructor
 public class Currency implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -31,52 +43,5 @@ public class Currency implements Serializable {
     @Column(name = "currency")
     private String currency;
 
-    public Currency() {
-    }
-
-    public Currency(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Currency)) {
-            return false;
-        }
-        Currency other = (Currency) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.project.entities.Currency[ id=" + id + " ]";
-    }
-
+  
 }
