@@ -63,29 +63,33 @@ public class ConverterBean implements Serializable {
 
     public void doAction() {
         ResponseModel model = restClient.getConvertRates(currencyFirst);
-        // System.out.println(model.toString());
         if (model.getQuotes() != null) {
             sessionContext.setRate(0);
-            if (currencyFirst.equalsIgnoreCase("EUR")) {
-                rate = model.getQuotes().getUSDEUR();
-            } else if (currencyFirst.equalsIgnoreCase("AMD")) {
-                rate = model.getQuotes().getUSDAMD();
-
-            } else if (currencyFirst.equalsIgnoreCase("NZD")) {
-                rate = model.getQuotes().getUSDNZD();
-            } else if (currencyFirst.equalsIgnoreCase("AUD")) {
-                rate = model.getQuotes().getUSDAUD();
-            } else if (currencyFirst.equalsIgnoreCase("JPY")) {
-                rate = model.getQuotes().getUSDJPY();
-            } else if (currencyFirst.equalsIgnoreCase("HUF")) {
-                rate = model.getQuotes().getUSDHUF();
-
-            } else if (currencyFirst.equalsIgnoreCase("CAD")) {
-                rate = model.getQuotes().getUSDCAD();
-            } else if (currencyFirst.equalsIgnoreCase("USD")) {
-                rate = model.getQuotes().getUSDUSD();
-            } else {
-                rate = 0d;
+            switch (currencyFirst) {
+                case "EUR":
+                    rate = model.getQuotes().getUSDEUR();
+                    break;
+                case "AMD":
+                    rate = model.getQuotes().getUSDAMD();
+                    break;
+                case "NZD":
+                    rate = model.getQuotes().getUSDNZD();
+                    break;
+                case "JPY":
+                    rate = model.getQuotes().getUSDJPY();
+                    break;
+                case "HUF":
+                    rate = model.getQuotes().getUSDHUF();
+                    break;
+                case "CAD":
+                    rate = model.getQuotes().getUSDCAD();
+                    break;
+                case "AUD":
+                    rate = model.getQuotes().getUSDAUD();
+                    break;
+                default:
+                    rate = 0d;
+                    break;
             }
             amount = 1;
             sessionContext.setRate(rate);
