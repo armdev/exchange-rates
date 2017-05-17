@@ -1,11 +1,7 @@
 package com.project.dao;
 
-import com.project.entities.Currency;
 import com.project.entities.Historical;
-import com.project.entities.User;
-import com.project.utils.HashUtils;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -45,7 +41,7 @@ public class HistoricalDAOImpl extends AbstractDao implements HistoricalDAO {
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
     public Historical findByHistoricalDate(String historicalDate) {
         Historical entity = null;
         try {

@@ -27,7 +27,7 @@ public class DictionaryDAOImpl extends AbstractDao implements DictionaryDAO {
 
     @Override
     @SuppressWarnings("unchecked")
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
     public List<Currency> findCurrencyList() {
         List<Currency> currecnyList = new ArrayList<>();
         try {

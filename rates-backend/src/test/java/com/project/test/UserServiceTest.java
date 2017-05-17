@@ -11,8 +11,10 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
@@ -27,7 +29,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {TestCoreConfig.class}, loader = AnnotationConfigContextLoader.class)
 @WebAppConfiguration
-//@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UserServiceTest {
 
     private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(UserServiceTest.class);
@@ -80,7 +82,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void test4UserLogin() {
+    public void test4FindUserLogin() {
         LOG.info("4. User Success login ");
         User findUser = instance.findUser(1L);
         assertNotNull(findUser);
@@ -90,7 +92,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void test5UserUnsuccessLogin() {
+    public void test5FindUserUnsuccessLogin() {
         LOG.info("5. User unuccess login ");
         User findUser = instance.findUser(1L);
         assertNotNull(findUser);
@@ -100,23 +102,61 @@ public class UserServiceTest {
     }
 
     @Test
-    public void test6CheckUserEmailForUpdateFalse() {
+    public void test6FindCheckUserEmailForUpdateFalse() {
         LOG.info("6. Check User Email For Update False: ");
-        User findUser = instance.findUser(1L);
-        assertNotNull(findUser);
-
-        boolean checkUserEmailForUpdate = instance.checkUserEmailForUpdate(1L, findUser.getEmail());
-
+        boolean checkUserEmailForUpdate = instance.checkUserEmailForUpdate(1L, "maild@gmail.de");
         assertEquals(checkUserEmailForUpdate, Boolean.FALSE);
     }
 
     @Test
-    public void test7CheckUserEmailForUpdateTrue() {
-        LOG.info("7. Check User Email For Update True : ");
-        User findUser = instance.findUser(1L);
-        assertNotNull(findUser);
-        boolean checkUserEmailForUpdateTrue = instance.checkUserEmailForUpdate(0L, findUser.getEmail());
+    public void test7FindCheckUserEmailForUpdateTrue() {
+        LOG.info("7. Check User Email For Update True : ");        
+        boolean checkUserEmailForUpdateTrue = instance.checkUserEmailForUpdate(0L, "mail@gmail.de");
         assertEquals(checkUserEmailForUpdateTrue, Boolean.TRUE);
+    }
+
+    @Test
+    public void test8FindUserByEmail() {
+        LOG.info("8. Find user by Email ");
+        User findByEmail = instance.getByEmail("mail@gmail.de");
+        assertNotNull(findByEmail);
+    }
+
+    @Test
+    public void test9FindUserByFakeEmail() {
+        LOG.info("9. Find user by fake Email ");
+        User findByFakeEmail = instance.getByEmail("mail-fake@gmail.de");
+        assertNull(findByFakeEmail);
+    }
+
+    @Test
+    public void test91FindChangePassword() {
+        LOG.info("10. Change password");
+        LOG.info("Store user get id");
+        Date currentDate = new Date();
+        User entity = new User("Jeck", "Smith", "gmail@gmail.de", "123456", currentDate, currentDate, currentDate, "Germany", "Berlin", "First Street", "0554856");
+        Long userId = instance.save(entity);
+        LOG.info("updating password " + userId);
+        int value = instance.updatePassword(userId, "qqqqqq");
+        assertEquals(1L, value);
+    }
+
+    @Test
+    public void test92FindChangePasswordFalse() {
+        LOG.info("11. Change password unsuccess");
+        int value = instance.updatePassword(8888L, "qqqqqq");
+        assertEquals(value, 0);
+    }
+
+    @Test
+    public void test93UpdateUserEntity() {
+        LOG.info("12. Update user");
+        Date currentDate = new Date();
+        User entity = new User("Anna", "Smith", "dodol@gmail.de", "123456", currentDate, currentDate, currentDate, "Germany", "Berlin", "First Street", "0554856");
+        Long userId = instance.save(entity);
+        entity.setId(userId);
+        Long value = instance.update(entity);
+        assertEquals(userId, value);
     }
 
 }

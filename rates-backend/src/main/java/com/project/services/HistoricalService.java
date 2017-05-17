@@ -8,7 +8,6 @@ import java.util.List;
  * @author armdev
  */
 public interface HistoricalService {
-
   
     public Long save(Historical entity);
 

@@ -61,7 +61,7 @@ public class UserDAOTest {
     public void test1UserSave() {
         LOG.info("1. Save User entity");
         Date currentDate = new Date();
-        User entity = new User("Jeck", "Smith", "mail@gmail.de", "123456", currentDate, currentDate, currentDate, "Germany", "Berlin", "First Street", "0554856");
+        User entity = new User("Jeck", "Smith", "mail10@gmail.de", "123456", currentDate, currentDate, currentDate, "Germany", "Berlin", "First Street", "0554856");
         Long userId = instance.save(entity);
         LOG.info("Saved new user: returned id " + userId);
         assertNotNull(userId);
@@ -103,28 +103,22 @@ public class UserDAOTest {
 
     @Test
     public void test6CheckUserEmailForUpdateFalse() {
-        LOG.info("6. Check User Email For Update False: ");
-        User findUser = instance.findUser(1L);
-        assertNotNull(findUser);
-
-        boolean checkUserEmailForUpdate = instance.checkUserEmailForUpdate(1L, findUser.getEmail());
-
+        LOG.info("6. Check User Email For Update False: ");        
+        boolean checkUserEmailForUpdate = instance.checkUserEmailForUpdate(1L, "mail10@gmail.de");
         assertEquals(checkUserEmailForUpdate, Boolean.FALSE);
     }
 
     @Test
     public void test7CheckUserEmailForUpdateTrue() {
-        LOG.info("7. Check User Email For Update True : ");
-        User findUser = instance.findUser(1L);
-        assertNotNull(findUser);
-        boolean checkUserEmailForUpdateTrue = instance.checkUserEmailForUpdate(0L, findUser.getEmail());
+        LOG.info("7. Check User Email For Update True : ");       
+        boolean checkUserEmailForUpdateTrue = instance.checkUserEmailForUpdate(0L, "mail10@gmail.de");
         assertEquals(checkUserEmailForUpdateTrue, Boolean.TRUE);
     }
 
     @Test
     public void test8FindUserByEmail() {
         LOG.info("8. Find user by Email ");
-        User findByEmail = instance.getByEmail("mail@gmail.de");
+        User findByEmail = instance.getByEmail("mail10@gmail.de");
         assertNotNull(findByEmail);
     }
 
@@ -135,18 +129,33 @@ public class UserDAOTest {
         assertNull(findByFakeEmail);
     }
 
-//    @Test
-//    public void test10ChangePassword() {
-//        LOG.info("10. Change password");
-//        int value = instance.updatePassword(1L, "qqqqqq");
-//        assertEquals(1L, value);
-//    }
+    @Test
+    public void test91ChangePassword() {
+        LOG.info("10. Change password");
+        LOG.info("Store user get id");
+        Date currentDate = new Date();
+        User entity = new User("Jeck", "Smith", "gmail28@gmail.de", "123456", currentDate, currentDate, currentDate, "Germany", "Berlin", "First Street", "0554856");
+        Long userId = instance.save(entity);
+        LOG.info("updating password " + userId);
+        int value = instance.updatePassword(userId, "qqqqqq");
+        assertEquals(1L, value);
+    }
 
-//    @Test
-//    public void test11ChangePasswordFalse() {
-//        LOG.info("11. Change password unsuccess");
-//        int value = instance.updatePassword(8888L, "qqqqqq");
-//        assertEquals(value, 0);
-//    }
+    @Test
+    public void test92ChangePasswordFalse() {
+        LOG.info("11. Change password unsuccess");
+        int value = instance.updatePassword(8888L, "qqqqqq");
+        assertEquals(value, 0);
+    }
 
+    @Test
+    public void test93UpdateUserEntity() {
+        LOG.info("12. Update user");    
+        Date currentDate = new Date();
+        User entity = new User("Anna", "Smith", "dolly@gmail.de", "123456", currentDate, currentDate, currentDate, "Germany", "Berlin", "First Street", "0554856");
+        Long userId = instance.save(entity);       
+        entity.setId(userId);
+        Long value = instance.update(entity);
+        assertEquals(userId, value);
+    }
 }

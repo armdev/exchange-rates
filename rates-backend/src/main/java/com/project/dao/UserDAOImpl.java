@@ -27,7 +27,7 @@ public class UserDAOImpl extends AbstractDao implements UserDAO {
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
     public User userLogin(String email, String password) {
         User entity = null;
         try {
@@ -78,7 +78,7 @@ public class UserDAOImpl extends AbstractDao implements UserDAO {
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
     public User findUser(Long id) {
         User entity = null;
         try {
@@ -95,23 +95,25 @@ public class UserDAOImpl extends AbstractDao implements UserDAO {
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
     public User getByEmail(String email) {
         User entity = null;
         try {
             Query query = getSession().createQuery("SELECT c FROM User c WHERE c.email=:email").setParameter("email", email);
-            entity = (User) query.uniqueResult();
-            if (entity == null) {
-                return null;
+            entity = (User) query.uniqueResult();            
+            if (entity != null) {
+                return entity;
             }
         } catch (Exception e) {
+            LOG.info("Find by email " + e.getLocalizedMessage());
             return null;
         }
-        return entity;
+        
+        return null;
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
     public boolean checkUserEmailForUpdate(Long id, String email) {
         boolean retValue = false;
         try {
@@ -121,6 +123,7 @@ public class UserDAOImpl extends AbstractDao implements UserDAO {
                 retValue = true;
             }
         } catch (Exception e) {
+            return false;
         }
         return retValue;
     }
