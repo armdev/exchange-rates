@@ -57,18 +57,18 @@ public class HistoricalDAOTest {
     }
 
     @Test
-    public void test1HistoricalSave() {
+    public void test1FindHistoricalSave() {
         LOG.info("1. Save Historical entity");      
-        Historical entity = new Historical(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, "2005-02-02");
+        Historical entity = new Historical(1.1, 2.2, 3.3, 4.4, 5.5, 6.0, 7.0, "2012-02-02");
         Long returnedId = instance.save(entity);
         LOG.info("Saved new user: returned id " + returnedId);
         assertNotNull(returnedId);
     }
 
     @Test
-    public void test2findByHistoricalDate() {
+    public void test2FindByHistoricalDate() {
         LOG.info("2. Test findByHistoricalDate ");
-        Historical entity = instance.findByHistoricalDate("2005-02-02");
+        Historical entity = instance.findByHistoricalDate("2012-02-02");
         assertNotNull(entity);
     }
 
