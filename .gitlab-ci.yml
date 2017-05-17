@@ -33,7 +33,7 @@ maven-build:
   image: maven:3.3.9-jdk-8
   stage: deploy 
   dependencies:
-   - build
+   - mysql_build
   script:
     - echo "SELECT 'OK';" | mysql --user=root --password=root --host=mysql root"
     - "mvn clean package -B -Dmaven.test.skip=false"
