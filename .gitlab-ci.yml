@@ -34,8 +34,7 @@ maven-build:
   stage: deploy 
   dependencies:
    - mysql_build
-  script:
-    - echo "SELECT 'OK';" | mysql --user=root --password=root --host=mysql root"
+  script:    
     - "mvn clean package -B -Dmaven.test.skip=false"
     - "ls -al"  
   artifacts:
