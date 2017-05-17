@@ -34,7 +34,7 @@ public class ChpassUserBean implements Serializable {
     private ApplicationManager applicationManager = null;
     @ManagedProperty("#{i18n}")
     @Setter
-    private ResourceBundle bundle = null;
+    private transient ResourceBundle bundle = null;
     private User user = new User();
     @ManagedProperty("#{sessionContext}")
     @Setter
@@ -42,8 +42,8 @@ public class ChpassUserBean implements Serializable {
     @Setter
     @Getter
     private Long userId;
-    private FacesContext context = null;
-    private ExternalContext externalContext = null;
+    private transient FacesContext context = null;
+    private transient ExternalContext externalContext = null;
     @Setter
     @Getter
     private String passwd;
@@ -65,14 +65,6 @@ public class ChpassUserBean implements Serializable {
         FacesMessage msg = new FacesMessage(bundle.getString("success"), bundle.getString("success"));
         FacesContext.getCurrentInstance().addMessage(null, msg);
         return "settings";
-    }
-
-    private String getRequestParameter(String paramName) {
-        String returnValue = null;
-        if (externalContext.getRequestParameterMap().containsKey(paramName)) {
-            returnValue = (externalContext.getRequestParameterMap().get(paramName));
-        }
-        return returnValue;
-    }
+    }  
 
 }

@@ -22,6 +22,8 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 })
 public class ResponseModel implements Serializable{
 
+    private static final long serialVersionUID = 1L;
+
     @JsonProperty("success")
     private Boolean success;
     @JsonProperty("terms")

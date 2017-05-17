@@ -38,12 +38,12 @@ public class ConverterBean implements Serializable {
     private RESTClientBean restClient = null;
     @ManagedProperty("#{i18n}")
     @Setter
-    private ResourceBundle bundle = null;
+    private transient ResourceBundle bundle = null;
     @ManagedProperty("#{sessionContext}")
     @Setter
     private SessionContext sessionContext = null;
-    private FacesContext context = null;
-    private ExternalContext externalContext = null;
+    private transient FacesContext context = null;
+    private transient ExternalContext externalContext = null;
     private final List<String> currencyList = new ArrayList<>();
     @Setter
     @Getter

@@ -26,11 +26,11 @@ public class RateCacheBean implements Serializable {
     private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(RateCacheBean.class);
     private static final long serialVersionUID = 8163039174281168443L;
 
-    private CacheManager manager;
+    private transient CacheManager manager;
     @Setter
-    private Cache liveCache;
+    private transient Cache liveCache;
     @Setter
-    private Cache historicalCache;
+    private transient Cache historicalCache;
 
     public RateCacheBean() {
     }
@@ -71,6 +71,9 @@ public class RateCacheBean implements Serializable {
     }
 
     public Object getLiveCache(String key) {
+        if (key == null) {
+            return null;
+        }
         try {
             if (this.liveCache == null) {
                 this.liveCache = this.manager.getCache("live.cache");
@@ -96,7 +99,7 @@ public class RateCacheBean implements Serializable {
         service.submit(() -> {
             if (historicalCache == null) {
                 historicalCache = manager.getCache("historical.cache");
-            }            
+            }
             historicalCache.put(new Element(key, value));
             historicalCache.flush();
         });
@@ -105,15 +108,19 @@ public class RateCacheBean implements Serializable {
     }
 
     public Object getHistoricalCache(String key) {
+        if (key == null) {
+            return null;
+        }
         try {
             if (this.historicalCache == null) {
                 this.historicalCache = this.manager.getCache("historical.cache");
             }
+
             Element elem = this.historicalCache.get(key);
             if ((elem != null) && (elem.getObjectValue() != null)) {
-
                 return elem.getObjectValue();
             }
+
         } catch (ClassCastException | IllegalStateException | CacheException e) {
         }
         return null;

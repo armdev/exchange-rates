@@ -37,11 +37,11 @@ public class UserRegister implements Serializable {
 
     @ManagedProperty("#{locationBean}")
     @Setter
-    private LocationBean locationBean = null;
+    private transient LocationBean locationBean = null;
 
     @ManagedProperty("#{i18n}")
     @Setter
-    private ResourceBundle bundle = null;
+    private transient ResourceBundle bundle = null;
 
     @Setter
     @Getter

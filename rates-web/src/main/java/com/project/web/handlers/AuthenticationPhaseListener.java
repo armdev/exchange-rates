@@ -17,35 +17,27 @@ import org.apache.log4j.Logger;
 public class AuthenticationPhaseListener implements PhaseListener {
 
     private static final long serialVersionUID = 1L;
-    private static HashMap<String, String> pagePermissionMapping = null;
+    @SuppressWarnings("unchecked")
+    private static final HashMap<String, String> pagePermissionMapping = new HashMap();
 
-    private static void redirect(FacesContext facesContext, String url) {
-        try {
-            facesContext.getExternalContext().redirect(url);
-        } catch (IOException e) {
-            throw new FacesException("Cannot redirect to " + url + " due to IO exception.", e);
-        }
-    }
-    private final Logger LOG = Logger.getLogger(AuthenticationPhaseListener.class);
+    private final transient Logger LOG = Logger.getLogger(AuthenticationPhaseListener.class);
 
     @SuppressWarnings("unchecked")
     private void pagePermissionMapping() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
-        if (pagePermissionMapping == null) {
-            pagePermissionMapping = new HashMap();
-            try {
-                ResourceBundle bundle = facesContext.getApplication().getResourceBundle(facesContext, "accessProp");
-                if (bundle != null) {
-                    Enumeration e = bundle.getKeys();
-                    while (e.hasMoreElements()) {
-                        String key = (String) e.nextElement();
-                        String value = bundle.getString(key);
-                        pagePermissionMapping.put(key, value);
-                    }
+        try {
+            ResourceBundle bundle = facesContext.getApplication().getResourceBundle(facesContext, "accessProp");
+            if (bundle != null) {
+                Enumeration e = bundle.getKeys();
+                while (e.hasMoreElements()) {
+                    String key = (String) e.nextElement();
+                    String value = bundle.getString(key);
+                    pagePermissionMapping.put(key, value);
                 }
-            } catch (NullPointerException | FacesException e) {
             }
+        } catch (NullPointerException | FacesException e) {
         }
+
     }
 
     @Override
@@ -67,16 +59,11 @@ public class AuthenticationPhaseListener implements PhaseListener {
             String permissions = pagePermissionMapping.get(viewId);
             SessionContext sessionContext = (SessionContext) ex.getSessionMap().get("sessionContext");
 
-            if (sessionContext == null && !viewId.contains("index.xhtml") && !viewId.contains("public.xhtml")
-                    && !viewId.contains("register.xhtml")) {
-            }
             if (permissions != null && permissions.contains("PUBLIC")) {
                 return;
             }
 
-            if (permissions != null) {
-               // LOG.info("permissions.contains(\"LOGGED\") " + !permissions.contains("LOGGED"));
-               // LOG.info("viewId " + viewId.toString());
+            if (permissions != null) {              
                 if (sessionContext.getUser() != null) {
                     if (sessionContext.getUser().getId() == null && !viewId.contains("index.xhtml") || !permissions.contains("LOGGED")) {
                         FacesContext.getCurrentInstance().getExternalContext().redirect(ex.getRequestContextPath() + "/index.jsf?illegalAccess");

@@ -22,8 +22,8 @@ public class UserLogout implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private FacesContext context = null;
-    private ExternalContext externalContext = null;
+    private transient FacesContext context = null;
+    private transient ExternalContext externalContext = null;
 
     public UserLogout() {
     }

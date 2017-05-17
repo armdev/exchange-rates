@@ -6,8 +6,8 @@
     <diskStore path="java.io.tmpdir" />
 
     <cache name="live.cache" 
-           maxEntriesLocalHeap="10000"
-           maxEntriesLocalDisk="1000"
+           maxEntriesLocalHeap="1000"
+           maxEntriesLocalDisk="10000"
            eternal="false"
            diskSpoolBufferSizeMB="20"
            timeToIdleSeconds="300"
@@ -18,8 +18,8 @@
     </cache>
     
     <cache name="historical.cache" 
-           maxEntriesLocalHeap="10000"
-           maxEntriesLocalDisk="1000"
+           maxEntriesLocalHeap="1000"
+           maxEntriesLocalDisk="10000"
            eternal="false"
            diskSpoolBufferSizeMB="20"
            timeToIdleSeconds="300"

@@ -23,6 +23,8 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 })
 public class Quotes implements Serializable{
 
+    private static final long serialVersionUID = 1L;
+
     @JsonProperty("USDUSD")
     private Integer uSDUSD;
     @JsonProperty("USDEUR")

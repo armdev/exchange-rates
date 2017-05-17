@@ -24,8 +24,7 @@ public class LocationBean {
 
     }
 
-    public LocationModel findLocation(String ip) {
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+    public LocationModel findLocation(String ip) {       
         context = FacesContext.getCurrentInstance();
         externalContext = context.getExternalContext();
         String path = externalContext.getRealPath("/WEB-INF/GeoLiteCity.dat");

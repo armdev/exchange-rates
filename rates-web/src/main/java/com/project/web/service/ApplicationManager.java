@@ -28,17 +28,17 @@ public class ApplicationManager implements Serializable {
     @ManagedProperty("#{userService}")
     @Setter
     @Getter
-    private UserService userService = null;
+    private transient UserService userService = null;
 
     @ManagedProperty("#{dictionaryService}")
     @Setter
     @Getter
-    private DictionaryService dictionaryService = null;
+    private transient DictionaryService dictionaryService = null;
 
     @ManagedProperty("#{historicalService}")
     @Setter
     @Getter
-    private HistoricalService historicalService = null;
+    private transient HistoricalService historicalService = null;
 
     @Getter
     @Setter
