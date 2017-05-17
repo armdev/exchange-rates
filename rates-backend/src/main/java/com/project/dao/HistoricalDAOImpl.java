@@ -47,13 +47,13 @@ public class HistoricalDAOImpl extends AbstractDao implements HistoricalDAO {
         try {
             Query query = getSession().createQuery("SELECT c FROM Historical c WHERE c.historicalDate=:historicalDate").setParameter("historicalDate", historicalDate);
             entity = (Historical) query.uniqueResult();
-            if (entity == null) {
-                return null;
+            if (entity != null) {
+                return entity;
             }
         } catch (Exception e) {
             return null;
         }
-        return entity;
+        return null;
     }
 
     @Override

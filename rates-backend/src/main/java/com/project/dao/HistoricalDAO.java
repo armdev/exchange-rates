@@ -8,7 +8,6 @@ import java.util.List;
  * @author armdev
  */
 public interface HistoricalDAO {
-
   
     public Long save(Historical entity);
 

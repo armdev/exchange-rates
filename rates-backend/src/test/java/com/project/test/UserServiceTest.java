@@ -134,7 +134,7 @@ public class UserServiceTest {
         LOG.info("10. Change password");
         LOG.info("Store user get id");
         Date currentDate = new Date();
-        User entity = new User("Jeck", "Smith", "gmail@gmail.de", "123456", currentDate, currentDate, currentDate, "Germany", "Berlin", "First Street", "0554856");
+        User entity = new User("Jeck", "Smith", "gmailj@gmail.de", "123456", currentDate, currentDate, currentDate, "Germany", "Berlin", "First Street", "0554856");
         Long userId = instance.save(entity);
         LOG.info("updating password " + userId);
         int value = instance.updatePassword(userId, "qqqqqq");
@@ -152,7 +152,7 @@ public class UserServiceTest {
     public void test93UpdateUserEntity() {
         LOG.info("12. Update user");
         Date currentDate = new Date();
-        User entity = new User("Anna", "Smith", "dodol@gmail.de", "123456", currentDate, currentDate, currentDate, "Germany", "Berlin", "First Street", "0554856");
+        User entity = new User("Anna", "Smith", "dodojl@gmail.de", "123456", currentDate, currentDate, currentDate, "Germany", "Berlin", "First Street", "0554856");
         Long userId = instance.save(entity);
         entity.setId(userId);
         Long value = instance.update(entity);
