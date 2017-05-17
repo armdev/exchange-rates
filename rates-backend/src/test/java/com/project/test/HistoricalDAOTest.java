@@ -59,7 +59,10 @@ public class HistoricalDAOTest {
     @Test
     public void test1FindHistoricalSave() {
         LOG.info("1. Save Historical entity");      
-        Historical entity = new Historical(1.1, 2.2, 3.3, 4.4, 5.5, 6.0, 7.0, "2012-02-02");
+        Historical entity = new Historical();
+        entity.setHistoricalDate("2012-02-02");
+        entity.setUsdamd(1.2);
+        
         Long returnedId = instance.save(entity);
         LOG.info("Saved new user: returned id " + returnedId);
         assertNotNull(returnedId);
