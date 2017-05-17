@@ -43,7 +43,7 @@ public class Historical implements Serializable {
     @Column(name = "usdaud")
     private Double usdaud;
     @Size(max = 20)
-    @Column(unique=true, name = "historicalDate")
+    @Column(unique=true, name = "historical_date")
     private String historicalDate;
 
     public Historical() {
