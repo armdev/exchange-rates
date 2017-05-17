@@ -25,7 +25,6 @@ import lombok.ToString;
 @Table(name = "currency")
 @Setter
 @Getter
-@AllArgsConstructor()
 @EqualsAndHashCode
 @ToString
 @NoArgsConstructor

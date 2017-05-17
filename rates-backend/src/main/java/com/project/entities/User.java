@@ -23,7 +23,6 @@ import lombok.ToString;
 @Table(name = "user")
 @Setter
 @Getter
-@AllArgsConstructor()
 @EqualsAndHashCode
 @ToString
 @NoArgsConstructor

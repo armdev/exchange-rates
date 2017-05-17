@@ -26,7 +26,6 @@ import lombok.ToString;
 @Table(name = "historical")
 @Setter
 @Getter
-@AllArgsConstructor()
 @EqualsAndHashCode
 @ToString
 @NoArgsConstructor
