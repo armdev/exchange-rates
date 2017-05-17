@@ -3,6 +3,8 @@ package com.project.web.handlers;
 import com.project.web.rest.ResponseModel;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.faces.bean.ApplicationScoped;
@@ -41,7 +43,6 @@ public class RateCacheBean implements Serializable {
     @PostConstruct
     public void init() {
         try {
-            
             ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
             InputStream fis = classLoader.getResourceAsStream("ehcache.xml");
             this.manager = CacheManager.create(fis);
@@ -56,13 +57,16 @@ public class RateCacheBean implements Serializable {
         if (key == null || value == null) {
             return false;
         }
-        if (this.liveCache == null) {
-            this.liveCache = this.manager.getCache("live.cache");
-        }
-        LOG.info("PUTTING CACHE " + key);
-        LOG.info("PUTTING CACHE " + value.toString());
-        liveCache.put(new Element(key, value));
-        liveCache.flush();
+        ExecutorService service = Executors.newCachedThreadPool();
+        service.submit(() -> {
+            if (liveCache == null) {
+                liveCache = manager.getCache("live.cache");
+            }
+            LOG.info("PUTTING CACHE " + key);
+            LOG.info("PUTTING CACHE " + value.toString());
+            liveCache.put(new Element(key, value));
+            liveCache.flush();
+        });
         return true;
     }
 
@@ -88,12 +92,15 @@ public class RateCacheBean implements Serializable {
         if (key == null || value == null) {
             return false;
         }
-        if (this.historicalCache == null) {
-            this.historicalCache = this.manager.getCache("historical.cache");
-        }
+        ExecutorService service = Executors.newCachedThreadPool();
+        service.submit(() -> {
+            if (historicalCache == null) {
+                historicalCache = manager.getCache("historical.cache");
+            }            
+            historicalCache.put(new Element(key, value));
+            historicalCache.flush();
+        });
 
-        historicalCache.put(new Element(key, value));
-        historicalCache.flush();
         return true;
     }
 

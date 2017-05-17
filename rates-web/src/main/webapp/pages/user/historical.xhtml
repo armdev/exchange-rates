@@ -51,6 +51,39 @@
                         </p:outputPanel>
                     </div>
                 </h:form>
+                <h:form prependId="false">                 
+                    <div class="container">
+                        <h3>Previous queries</h3>
+                        <br/>
+                        <p:poll interval="2" update="@form" />
+                        <p:dataTable var="list" value="#{historicalRatesBean.historicalData}">
+                            <p:column headerText="Historical Date">
+                                <h:outputText value="#{list.historicalDate}" />
+                            </p:column>
+                            <p:column headerText="USDEUR">
+                                <h:outputText value="#{list.usdeur}" />
+                            </p:column>
+                            <p:column headerText="USDAMD">
+                                <h:outputText value="#{list.usdamd}" />
+                            </p:column>
+                            <p:column headerText="USDNZD">
+                                <h:outputText value="#{list.usdnzd}" />
+                            </p:column>
+                            <p:column headerText="USDJPY">
+                                <h:outputText value="#{list.usdjpy}" />
+                            </p:column>
+                            <p:column headerText="USDHUF">
+                                <h:outputText value="#{list.usdhuf}" />
+                            </p:column>
+                            <p:column headerText="USDCAD">
+                                <h:outputText value="#{list.usdcad}" />
+                            </p:column>
+                            <p:column headerText="USDAUD">
+                                <h:outputText value="#{list.usdaud}" />
+                            </p:column>
+                        </p:dataTable>
+                    </div>
+                </h:form>
             </ui:define>
         </ui:composition>
     </f:view>

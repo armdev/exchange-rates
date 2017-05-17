@@ -1,5 +1,6 @@
 package com.project.web.converter;
 
+import com.project.entities.Historical;
 import com.project.web.handlers.RateCacheBean;
 import com.project.web.handlers.SessionContext;
 import com.project.web.rest.RESTClientBean;
@@ -9,6 +10,7 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -68,25 +70,30 @@ public class HistoricalRatesBean implements Serializable {
     public void init() {
         context = FacesContext.getCurrentInstance();
         externalContext = context.getExternalContext();
-
         if (historical != null) {
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             String reportDate = df.format(historical);
-            LOG.info("@@@@@Historical Date " + reportDate);
+            LOG.info("Historical Date " + reportDate);
             responseModel = (ResponseModel) cacheHandler.getHistoricalCache(sessionContext.getUser().getEmail() + reportDate);
             if (responseModel == null) {
-                LOG.info("@@@@@Loading response model from API");
-               responseModel = restClient.getHistoricalRates(reportDate);
-               cacheHandler.putHistoricalCache(sessionContext.getUser().getEmail() + reportDate, responseModel);
+                LOG.info("Loading response model from API");
+                responseModel = restClient.getHistoricalRates(reportDate);
+                LOG.info("Store in the cache");
+                cacheHandler.putHistoricalCache(sessionContext.getUser().getEmail() + reportDate, responseModel);
+                LOG.info("Store in the database");
+                applicationManager.storeHistoricalData(reportDate, responseModel.getQuotes());
             } else {
-                LOG.info("@@@@@Loading response model from cache");
+                LOG.info("Loading response model from cache");
             }
             if (responseModel.getTimestamp() != null) {
                 timeStamp = new java.util.Date((long) responseModel.getTimestamp() * 1000);
-                LOG.info("@@@@@PUT NEW TIMESTAMP " + timeStamp);
+                LOG.info("PUT NEW TIMESTAMP " + timeStamp);
             }
         }
+    }
 
+    public List<Historical> getHistoricalData() {
+        return applicationManager.getHistoricalService().findAll();
     }
 
     public void calllistener() {
