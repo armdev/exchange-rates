@@ -68,4 +68,16 @@ public class Historical implements Serializable {
         this.historicalDate = historicalDate;
     }
 
+    public Historical(Long id, Double usdeur, Double usdamd, Double usdnzd, Double usdjpy, Double usdhuf, Double usdcad, Double usdaud, String historicalDate) {
+        this.id = id;
+        this.usdeur = usdeur;
+        this.usdamd = usdamd;
+        this.usdnzd = usdnzd;
+        this.usdjpy = usdjpy;
+        this.usdhuf = usdhuf;
+        this.usdcad = usdcad;
+        this.usdaud = usdaud;
+        this.historicalDate = historicalDate;
+    }
+
 }
