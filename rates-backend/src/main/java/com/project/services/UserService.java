@@ -18,9 +18,7 @@ public interface UserService {
 
     public boolean checkUserEmailForUpdate(Long id, String email);
 
-    public void updatePassword(Long userId, String password);
-
-    public boolean delete(Long id);
+    public int updatePassword(Long userId, String password);  
 
     public Long update(User entity);
 }

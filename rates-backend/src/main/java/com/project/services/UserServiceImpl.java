@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -15,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("userService")
 @Qualifier("userService")
 @Component
-@Transactional
+@Transactional(propagation = Propagation.REQUIRED)
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -47,8 +48,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updatePassword(Long userId, String password) {
-        dao.updatePassword(userId, password);
+    public int updatePassword(Long userId, String password) {
+        return dao.updatePassword(userId, password);
     }
 
     @Override
@@ -56,9 +57,5 @@ public class UserServiceImpl implements UserService {
         return dao.checkUserEmailForUpdate(id, email);
     }
 
-    @Override
-    public boolean delete(Long id) {
-        return dao.delete(id);
-    }
 
 }

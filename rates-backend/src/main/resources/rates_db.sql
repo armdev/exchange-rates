@@ -2,7 +2,8 @@
 SQLyog Ultimate v9.50 
 MySQL - 5.5.5-10.1.13-MariaDB : Database - rates
 *********************************************************************
-*/
+*/
+
 
 /*!40101 SET NAMES utf8 */;
 
@@ -73,7 +74,8 @@ CREATE TABLE `user` (
 
 /*Data for the table `user` */
 
-insert  into `user`(`id`,`firstname`,`lastname`,`email`,`passwd`,`register_date`,`birth_date`,`last_login_date`,`country`,`city`,`street`,`zipcode`) values (11,'John','Smith','armen@gmail.com','0b4e7a0e5fe84ad35fb5f95b9ceeac79','2017-05-13 21:55:33',NULL,NULL,'Armenia','Yerevan','new streeet','0295595');
+insert  into `user`(`id`,`firstname`,`lastname`,`email`,`passwd`,`register_date`,`birth_date`,`last_login_date`,`country`,`city`,`street`,`zipcode`) values (11,'John','Smith','don@gmail.com','0b4e7a0e5fe84ad35fb5f95b9ceeac79','2017-05-13 21:55:33',NULL,NULL,'Armenia','Yerevan','new streeet','0295595');
+insert  into `user`(`id`,`firstname`,`lastname`,`email`,`passwd`,`register_date`,`birth_date`,`last_login_date`,`country`,`city`,`street`,`zipcode`) values (21,'John','Smith','den@gmail.com','0b4e7a0e5fe84ad35fb5f95b9ceeac79','2017-05-13 21:55:33',NULL,NULL,'Armenia','Yerevan','new streeet','0295595');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

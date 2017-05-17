@@ -27,6 +27,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {TestCoreConfig.class}, loader = AnnotationConfigContextLoader.class)
 @WebAppConfiguration
+//@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UserServiceTest {
 
     private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(UserServiceTest.class);
@@ -54,67 +55,68 @@ public class UserServiceTest {
 
     }
 
-    /**
-     * Test of UserService
-     */
     @Test
-    public void testUserService() {
-        LOG.info("Start Testing UserDAO");
-
+    public void test1UserSave() {
+        LOG.info("1. Save User entity");
         Date currentDate = new Date();
+        User entity = new User("Jeck", "Smith", "mail@gmail.de", "123456", currentDate, currentDate, currentDate, "Germany", "Berlin", "First Street", "0554856");
+        Long userId = instance.save(entity);
+        LOG.info("Saved new user: returned id " + userId);
+        assertNotNull(userId);
+    }
 
-        User entity = new User("Jeck", "Smith", "mail@gmail.com", "123456", currentDate, currentDate, currentDate, "Germany", "Berlin", "First Street", "0554856");        
-
-        Long result = instance.save(entity);
-        LOG.info("1. Saved new user: returned id " + result);
-
-        assertNotNull(result);
-
-        LOG.info("2. Find user by id " + result);
-        User returnedUser = instance.findUser(result);
-
+    @Test
+    public void test2FindUserById() {
+        LOG.info("2. Test Find User By Id ");
+        User returnedUser = instance.findUser(1l);
         assertNotNull(returnedUser);
+    }
 
+    @Test
+    public void test3FindUserByFakeId() {
         LOG.info("3. Find user by fake id ");
         User doNotFindUser = instance.findUser(0L);
         assertNull(doNotFindUser);
+    }
 
-        LOG.info("4. Found User by Id " + returnedUser.getFirstname() + " " + returnedUser.getLastname());
-        assertEquals(returnedUser.getEmail(), entity.getEmail());
+    @Test
+    public void test4UserLogin() {
+        LOG.info("4. User Success login ");
+        User findUser = instance.findUser(1L);
+        assertNotNull(findUser);
 
-        User loggedUser = instance.userLogin(returnedUser.getEmail(), "123456");
-
-        LOG.info("5. User login Success " + loggedUser.toString());
+        User loggedUser = instance.userLogin(findUser.getEmail(), "123456");
         assertNotNull(loggedUser);
+    }
 
-        User unsuccess = instance.userLogin(returnedUser.getEmail(), "0123456");
+    @Test
+    public void test5UserUnsuccessLogin() {
+        LOG.info("5. User unuccess login ");
+        User findUser = instance.findUser(1L);
+        assertNotNull(findUser);
 
-        LOG.info("6. User login unuccess ");
-
+        User unsuccess = instance.userLogin(findUser.getEmail(), "7777777");
         assertNull(unsuccess);
+    }
 
-        LOG.info("7. Check User Email For Update False: ");
-        boolean checkUserEmailForUpdate = instance.checkUserEmailForUpdate(result, loggedUser.getEmail());
+    @Test
+    public void test6CheckUserEmailForUpdateFalse() {
+        LOG.info("6. Check User Email For Update False: ");
+        User findUser = instance.findUser(1L);
+        assertNotNull(findUser);
+
+        boolean checkUserEmailForUpdate = instance.checkUserEmailForUpdate(1L, findUser.getEmail());
 
         assertEquals(checkUserEmailForUpdate, Boolean.FALSE);
+    }
 
-        LOG.info("8. Check User Email For Update True : ");
-        boolean checkUserEmailForUpdateTrue = instance.checkUserEmailForUpdate(0L, loggedUser.getEmail());
-
+    @Test
+    public void test7CheckUserEmailForUpdateTrue() {
+        LOG.info("7. Check User Email For Update True : ");
+        User findUser = instance.findUser(1L);
+        assertNotNull(findUser);
+        boolean checkUserEmailForUpdateTrue = instance.checkUserEmailForUpdate(0L, findUser.getEmail());
         assertEquals(checkUserEmailForUpdateTrue, Boolean.TRUE);
-
-        LOG.info("9. Deleting user with not existing id : ");
-        boolean checkFail = instance.delete(0L);
-
-        LOG.info("10. CheckFail  " + checkFail);
-
-        assertEquals(checkFail, Boolean.FALSE);
-
-        boolean check = instance.delete(result);
-
-        LOG.info("11. Delete User with id   " + result + " " + check);
-
-        assertEquals(check, Boolean.TRUE);
     }
 
 }

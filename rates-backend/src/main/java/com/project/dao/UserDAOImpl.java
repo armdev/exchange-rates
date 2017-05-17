@@ -79,11 +79,13 @@ public class UserDAOImpl extends AbstractDao implements UserDAO {
     public User findUser(Long id) {
         User entity = null;
         try {
-            entity = (User) getSession().get(User.class, id);//get user from database
+            Query query = getSession().createQuery("SELECT c FROM User c WHERE c.id=:id").setParameter("id", id);
+            entity = (User) query.uniqueResult();
             if (entity == null) {
                 return null;
             }
         } catch (Exception e) {
+            LOG.info("getLocalizedMessage " + e.getLocalizedMessage());
             return null;
         }
         return entity;
@@ -93,10 +95,8 @@ public class UserDAOImpl extends AbstractDao implements UserDAO {
     public User getByEmail(String email) {
         User entity = null;
         try {
-
             Query query = getSession().createQuery("SELECT c FROM User c WHERE c.email=:email").setParameter("email", email);
             entity = (User) query.uniqueResult();
-
             if (entity == null) {
                 return null;
             }
@@ -112,7 +112,6 @@ public class UserDAOImpl extends AbstractDao implements UserDAO {
         try {
             Query query = getSession().createQuery("SELECT c FROM User c WHERE c.email=:email and c.id != :id").setParameter("email", email).setParameter("id", id);
             User entity = (User) query.uniqueResult();
-
             if (entity != null) {
                 retValue = true;
             }
@@ -122,16 +121,30 @@ public class UserDAOImpl extends AbstractDao implements UserDAO {
     }
 
     @Override
-    public void updatePassword(Long userId, String password) {
-        try {
-            int executeUpdate = getSession().createQuery("UPDATE User o SET o.passwd=:passwd WHERE o.id=:id").setParameter("passwd", HashUtils.hashPassword(password)).setParameter("id", userId).executeUpdate();
-        } catch (Exception e) {
-
+    public int updatePassword(Long userId, String password) {
+        int executeUpdate = 0;
+        if (userId != null && password != null) {
+            LOG.info("######userId " + userId);
+            LOG.info("######password " + password);
+            User user = this.findUser(userId);
+            LOG.info("######user find " + user);
+            if (user != null && user.getId().equals(userId)) {
+                try {
+                    executeUpdate = getSession().createQuery("UPDATE User o SET o.passwd=:passwd WHERE o.id=:id")
+                            .setParameter("passwd", HashUtils.hashPassword(password.trim()))
+                            .setParameter("id", userId)
+                            .executeUpdate();
+                    LOG.info("######executeUpdate " + executeUpdate);
+                } catch (Exception e) {
+                    LOG.info("getLocalizedMessage " + e.getLocalizedMessage());
+                }
+            }
         }
+        LOG.info("######executeUpdate returned " + executeUpdate);
+        return executeUpdate;
     }
 
-    @Override
-    public boolean delete(Long id) {
+    private boolean delete(Long id) {
         try {
             User findUser = this.findUser(id);
             if (findUser != null) {
