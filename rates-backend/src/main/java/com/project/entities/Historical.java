@@ -28,7 +28,6 @@ import lombok.ToString;
 @Getter
 @EqualsAndHashCode
 @ToString
-@NoArgsConstructor
 public class Historical implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -57,6 +56,7 @@ public class Historical implements Serializable {
     @Column(unique = true, name = "historical_date")
     private String historicalDate;
 
+   
     public Historical(Double usdeur, Double usdamd, Double usdnzd, Double usdjpy, Double usdhuf, Double usdcad, Double usdaud, String historicalDate) {
         this.usdeur = usdeur;
         this.usdamd = usdamd;
@@ -66,6 +66,13 @@ public class Historical implements Serializable {
         this.usdcad = usdcad;
         this.usdaud = usdaud;
         this.historicalDate = historicalDate;
+    }
+
+    public Historical() {
+    }
+
+    public Historical(Long id) {
+        this.id = id;
     }
 
     public Historical(Long id, Double usdeur, Double usdamd, Double usdnzd, Double usdjpy, Double usdhuf, Double usdcad, Double usdaud, String historicalDate) {
