@@ -17,15 +17,14 @@
                         <br/>                      
                         <p:growl/>
                         <p:outputPanel autoUpdate="true" id="cpanel">
-                            <h1>Convert Currencies</h1>
+                            <h3>Convert Currencies(Select currency and click)</h3>
                             <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank form-group">      
-
                                 <h:outputLabel for="amountId" value="USD Amount"  rendered="#{sessionContext.rate > 0}"/>                                                                
                                 <p:inputText id="amountId" value="#{rateConverterBean.amount}" rendered="#{sessionContext.rate > 0}">
                                     <p:ajax event="keyup" update="rate" listener="#{rateConverterBean.handleBlurEvent()}" />
                                     <f:convertNumber minFractionDigits="2" maxFractionDigits="2" pattern="#0.000"/>
                                 </p:inputText>                              
-                                <h:outputLabel for="currencySecond" value="To "/>
+                                <h:outputLabel for="currencySecond" value="To " rendered="#{sessionContext.rate > 0}"/>
                                 <h:selectOneMenu styleClass="form-control"   id="currencySecond" value="#{rateConverterBean.currencyFirst}" style="width: 130px;">                            
                                     <f:selectItems value="#{rateConverterBean.currencyList}" itemLabel="#{list}" var="list"  itemValue="#{list}"/>                         
                                 </h:selectOneMenu>
