@@ -3,6 +3,7 @@ package com.project.dao;
 import com.project.entities.User;
 import com.project.utils.HashUtils;
 import java.util.Date;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -26,22 +27,20 @@ public class UserDAOImpl extends AbstractDao implements UserDAO {
     }
 
     @Override
-public User userLogin(String email, String password) {
-    User entity = null;
-    try {
-        Query query = getSession().createQuery("SELECT c FROM User c WHERE c.email=:email AND c.passwd=:passwd")
-                .setParameter("email", email)
-                .setParameter("passwd", HashUtils.hashPassword(password));
-
-        if (query.uniqueResult() != null) {
-            entity = (User) query.uniqueResult();
+    public User userLogin(String email, String password) {
+        User entity = null;
+        try {
+            Query query = getSession().createQuery("SELECT c FROM User c WHERE c.email=:email AND c.passwd=:passwd")
+                    .setParameter("email", email)
+                    .setParameter("passwd", HashUtils.hashPassword(password));
+            if (query.uniqueResult() != null) {
+                entity = (User) query.uniqueResult();
+            }
+        } catch (Exception e) {
+            LOG.info("Exception in user login " + e.getLocalizedMessage());
         }
-
-    } catch (Exception e) {
-        System.out.println("No result, method login " + e.getLocalizedMessage());
+        return entity;
     }
-    return entity;
-}
 
     @Override
     public Long save(User entity) {
@@ -54,9 +53,8 @@ public User userLogin(String email, String password) {
             getSession().persist(entity);
             getSession().flush();
             id = entity.getId();
-        } catch (Exception e) {
+        } catch (HibernateException e) {
             LOG.error(e.getLocalizedMessage());
-            e.printStackTrace();
         }
         return id;
     }
@@ -65,13 +63,11 @@ public User userLogin(String email, String password) {
     public Long update(User entity) {
         Long id = 0L;
         try {
-
             getSession().merge(entity);
             getSession().flush();
             id = entity.getId();
-        } catch (Exception e) {
+        } catch (HibernateException e) {
             LOG.error(e.getLocalizedMessage());
-            e.printStackTrace();
         }
         return id;
     }
@@ -85,7 +81,6 @@ public User userLogin(String email, String password) {
                 return null;
             }
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
         return entity;
@@ -93,7 +88,6 @@ public User userLogin(String email, String password) {
 
     @Override
     public User getByEmail(String email) {
-
         User entity = null;
         try {
 
@@ -111,7 +105,6 @@ public User userLogin(String email, String password) {
 
     @Override
     public boolean checkUserEmailForUpdate(Long id, String email) {
-
         boolean retValue = false;
         try {
             Query query = getSession().createQuery("SELECT c FROM User c WHERE c.email=:email and c.id != :id").setParameter("email", email).setParameter("id", id);
@@ -143,7 +136,6 @@ public User userLogin(String email, String password) {
                 return true;
             }
         } catch (Exception e) {
-
         }
         return false;
     }

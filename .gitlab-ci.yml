@@ -1,11 +1,12 @@
-image: maven:3.3.9-jdk-8
-#dostiharise/ubuntu-java-mysql
+image: docker:latest
+
 stages:
   - build
   - deploy
   - deliver
 
 services:
+  - docker:dind
   - mysql:latest
   
 cache:
@@ -14,30 +15,34 @@ cache:
    - rates-backend/
    - rates-web/
 
-project_build:
+mysql_build:
   stage: build
   variables:
     MYSQL_DATABASE: rates
-    MYSQL_ROOT_PASSWORD: root
-  image: mysql maven:3.3.9-jdk-8    
+    MYSQL_ROOT_PASSWORD: root   
+  services:
+  - mysql:latest
+  image: mysql
   before_script:
   - mysql --version
   script:
   - echo "SELECT 'OK';" | mysql --user=root --password="${MYSQL_ROOT_PASSWORD}" --host=mysql "${MYSQL_DATABASE}"
   - mysql --user=root --password="${MYSQL_ROOT_PASSWORD}" --host=mysql rates < db/rates_db.sql
-  - "mvn clean package -B -Dmaven.test.skip=false" 
-  - "ls -al"  
+
+maven-build:
+  image: maven:3.3.9-jdk-8
+  stage: deploy 
+  dependencies:
+   - build
+  script:
+    - echo "SELECT 'OK';" | mysql --user=root --password=root --host=mysql root"
+    - "mvn clean package -B -Dmaven.test.skip=false"
+    - "ls -al"  
   artifacts:
         paths:
         - "rates-backend/target/rates-backend-1.0-SNAPSHOT.jar"      
-  allow_failure: false  
+  allow_failure: false
 
-
-deploy:
-  stage: deploy
-  script: "echo Deploy started"
-  only:
-    - master
 
 deliver:
   stage: deliver
