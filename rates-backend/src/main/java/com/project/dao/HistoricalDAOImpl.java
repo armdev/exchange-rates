@@ -50,8 +50,10 @@ public class HistoricalDAOImpl extends AbstractDao implements HistoricalDAO {
             if (entity != null) {
                 return entity;
             }
+        } catch (RuntimeException e) {
+            throw e;
         } catch (Exception e) {
-            return null;
+            LOG.info(e.getLocalizedMessage());
         }
         return null;
     }

@@ -58,8 +58,7 @@ public class HistoricalServiceTest {
 
     @Test
     public void test11HistoricalSave() {
-        LOG.info("1. Save Historical entity");
-        Date currentDate = new Date();
+        LOG.info("1. Save Historical entity");       
         Historical entity = new Historical(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, "2007-02-02");
         Long returnedId = instance.save(entity);
         LOG.info("Saved new user: returned id " + returnedId);

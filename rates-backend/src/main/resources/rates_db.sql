@@ -48,11 +48,6 @@ CREATE TABLE `historical` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
-/*Data for the table `historical` */
-
-insert  into `historical`(`id`,`usdeur`,`usdamd`,`usdnzd`,`usdjpy`,`usdhuf`,`usdcad`,`usdaud`,`historical_date`) values (1,1.1074,568.532994,2.241309,127.933302,269.657357,1.562798,1.863958,'2002-05-02'),(2,0.750445,405.553336,1.195259,89.83912,220.039332,0.990269,0.95184,'2013-01-18'),(3,0.891469,554.974735,1.782341,118.69526,221.492033,1.423255,1.586676,'2003-05-01'),(4,0.814343,439.477839,1.63021,117.499565,217.139049,1.161629,1.377111,'2006-04-05'),(5,0.766883,504.99121,1.408949,103.20193,189.117148,1.187422,1.277228,'2004-11-22');
-
-/*Table structure for table `user` */
 
 DROP TABLE IF EXISTS `user`;
 
@@ -72,10 +67,6 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
-/*Data for the table `user` */
-
-insert  into `user`(`id`,`firstname`,`lastname`,`email`,`passwd`,`register_date`,`birth_date`,`last_login_date`,`country`,`city`,`street`,`zipcode`) values (11,'John','Smith','don@gmail.com','0b4e7a0e5fe84ad35fb5f95b9ceeac79','2017-05-13 21:55:33',NULL,NULL,'Armenia','Yerevan','new streeet','0295595');
-insert  into `user`(`id`,`firstname`,`lastname`,`email`,`passwd`,`register_date`,`birth_date`,`last_login_date`,`country`,`city`,`street`,`zipcode`) values (21,'John','Smith','den@gmail.com','0b4e7a0e5fe84ad35fb5f95b9ceeac79','2017-05-13 21:55:33',NULL,NULL,'Armenia','Yerevan','new streeet','0295595');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

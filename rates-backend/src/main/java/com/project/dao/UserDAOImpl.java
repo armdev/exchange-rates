@@ -100,7 +100,7 @@ public class UserDAOImpl extends AbstractDao implements UserDAO {
         User entity = null;
         try {
             Query query = getSession().createQuery("SELECT c FROM User c WHERE c.email=:email").setParameter("email", email);
-            entity = (User) query.uniqueResult();            
+            entity = (User) query.uniqueResult();
             if (entity != null) {
                 return entity;
             }
@@ -108,7 +108,7 @@ public class UserDAOImpl extends AbstractDao implements UserDAO {
             LOG.info("Find by email " + e.getLocalizedMessage());
             return null;
         }
-        
+
         return null;
     }
 
@@ -122,8 +122,10 @@ public class UserDAOImpl extends AbstractDao implements UserDAO {
             if (entity != null) {
                 retValue = true;
             }
+        } catch (RuntimeException e) {
+            throw e;
         } catch (Exception e) {
-            return false;
+            LOG.info(e.getLocalizedMessage());
         }
         return retValue;
     }
@@ -151,18 +153,6 @@ public class UserDAOImpl extends AbstractDao implements UserDAO {
         }
         LOG.info("######executeUpdate returned " + executeUpdate);
         return executeUpdate;
-    }
-
-    private boolean delete(Long id) {
-        try {
-            User findUser = this.findUser(id);
-            if (findUser != null) {
-                this.delete(findUser);
-                return true;
-            }
-        } catch (Exception e) {
-        }
-        return false;
     }
 
 }
