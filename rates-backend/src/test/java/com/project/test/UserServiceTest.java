@@ -63,7 +63,7 @@ public class UserServiceTest {
 
         Date currentDate = new Date();
 
-        User entity = new User("Jeck", "Smith", "mail@gmail.com", "123456", currentDate, currentDate, currentDate, "Germany", "Berlin", "First Street", "0554856");
+        User entity = new User("Jeck", "Smith", "mail@gmail.com", "123456", currentDate, currentDate, currentDate, "Germany", "Berlin", "First Street", "0554856");        
 
         Long result = instance.save(entity);
         LOG.info("1. Saved new user: returned id " + result);

@@ -8,6 +8,7 @@ import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -17,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Component
 @Repository("userDAO")
 @Qualifier("userDAO")
-@Transactional
+@Transactional(propagation = Propagation.REQUIRED)
 public class UserDAOImpl extends AbstractDao implements UserDAO {
 
     private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(UserDAOImpl.class);
@@ -47,12 +48,14 @@ public class UserDAOImpl extends AbstractDao implements UserDAO {
         Date currentDate = new Date(System.currentTimeMillis());
         Long id = 0L;
         try {
-            String hashedPasswd = HashUtils.hashPassword(entity.getPasswd());
-            entity.setRegisterDate(currentDate);
-            entity.setPasswd(hashedPasswd);
-            getSession().persist(entity);
-            getSession().flush();
-            id = entity.getId();
+            if (entity.getPasswd() != null) {
+                String hashedPasswd = HashUtils.hashPassword(entity.getPasswd());
+                entity.setRegisterDate(currentDate);
+                entity.setPasswd(hashedPasswd);
+                getSession().persist(entity);
+                getSession().flush();
+                id = entity.getId();
+            }
         } catch (HibernateException e) {
             LOG.error(e.getLocalizedMessage());
         }

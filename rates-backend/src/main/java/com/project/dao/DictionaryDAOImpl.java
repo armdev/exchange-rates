@@ -25,12 +25,6 @@ public class DictionaryDAOImpl extends AbstractDao implements DictionaryDAO {
         LOG.info("DictionaryDAO called");
     }
 
-//    @Override
-//    public List<Currency> findCurrencyList() {        
-//        @SuppressWarnings("unchecked")
-//        List<Currency> list = getSession().createCriteria(Currency.class).list();      
-//        return list;
-//    }
     @Override
     @SuppressWarnings("unchecked")
     public List<Currency> findCurrencyList() {

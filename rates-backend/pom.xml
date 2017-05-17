@@ -43,7 +43,18 @@
         <hibernate-entitymanager>4.3.1.Final</hibernate-entitymanager>
     </properties>
 
-    <dependencies>   
+    <dependencies>           
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.195</version>
+        </dependency>        
+<dependency>
+    <groupId>hsqldb</groupId>
+    <artifactId>hsqldb</artifactId>
+    <version>1.8.0.10</version>
+</dependency>
+
         <dependency>
             <groupId>org.dbunit</groupId>
             <artifactId>dbunit</artifactId>

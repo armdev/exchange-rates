@@ -24,7 +24,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
     @ComponentScan.Filter(Configuration.class)})
 @EnableTransactionManagement
 @EnableMBeanExport
-
 @PropertySource(value = {"classpath:application_test.properties"})
 public class TestCoreConfig {
 
@@ -55,6 +54,11 @@ public class TestCoreConfig {
         properties.put("hibernate.dialect", environment.getRequiredProperty("hibernate.dialect"));
         properties.put("hibernate.show_sql", environment.getRequiredProperty("hibernate.show_sql"));
         properties.put("hibernate.format_sql", environment.getRequiredProperty("hibernate.format_sql"));
+        properties.put("hibernate.hbm2ddl.auto", environment.getRequiredProperty("hibernate.hbm2ddl.auto"));
+        properties.put("hibernate.transaction.factory_class", environment.getRequiredProperty("hibernate.transaction.factory_class"));
+        properties.put("hibernate.transaction.auto_close_session", environment.getRequiredProperty("hibernate.transaction.auto_close_session"));
+        properties.put("hibernate.connection.release_mode", environment.getRequiredProperty("hibernate.connection.release_mode"));
+        properties.put("hibernate.id.new_generator_mappings", environment.getRequiredProperty("hibernate.id.new_generator_mappings"));
         return properties;
     }
 
@@ -65,6 +69,5 @@ public class TestCoreConfig {
         txManager.setSessionFactory(s);
         return txManager;
     }
-
 
 }

@@ -1,4 +1,4 @@
-image: docker:latest
+image: maven:3.3.9-jdk-8
 
 stages:
   - build
@@ -6,8 +6,7 @@ stages:
   - deliver
 
 services:
-  - docker:dind
-  - mysql:latest
+  - docker:dind  
   
 cache:
   key: ${CI_BUILD_NAME}
@@ -15,25 +14,9 @@ cache:
    - rates-backend/
    - rates-web/
 
-mysql_build:
-  stage: build
-  variables:
-    MYSQL_DATABASE: rates
-    MYSQL_ROOT_PASSWORD: root   
-  services:
-  - mysql:latest
-  image: mysql
-  before_script:
-  - mysql --version
-  script:
-  - echo "SELECT 'OK';" | mysql --user=root --password="${MYSQL_ROOT_PASSWORD}" --host=mysql "${MYSQL_DATABASE}"
-  - mysql --user=root --password="${MYSQL_ROOT_PASSWORD}" --host=mysql rates < db/rates_db.sql
-
 maven-build:
   image: maven:3.3.9-jdk-8
-  stage: deploy 
-  dependencies:
-   - mysql_build
+  stage: build 
   script:    
     - "mvn clean package -B -Dmaven.test.skip=false"
     - "ls -al"  
@@ -43,9 +26,15 @@ maven-build:
   allow_failure: false
 
 
+deploy:
+  stage: deploy
+  script: "echo Delivery started"
+  only:
+    - master
+    
 deliver:
   stage: deliver
   script: "echo Delivery started"
   only:
-    - master
+    - master    
  

@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -21,11 +22,12 @@ import javax.persistence.TemporalType;
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @Id
-    @SequenceGenerator(name = "USER_SEQ", allocationSize = 1, sequenceName = "USER_SEQ")
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "USER_SEQ")
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "id")    
+    @SequenceGenerator(name = "USER_SEQ", allocationSize = 1, sequenceName = "USER_SEQ")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "USER_SEQ"  )
     private Long id;
     @Column(name = "firstname")
     private String firstname;

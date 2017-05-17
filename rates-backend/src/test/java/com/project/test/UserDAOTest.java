@@ -13,8 +13,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
@@ -34,7 +32,7 @@ public class UserDAOTest {
     private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(UserDAOTest.class);
 
     @BeforeClass
-    public static void setUpClass() {
+    public static void setUpClass() {       
 
     }
 
@@ -65,7 +63,7 @@ public class UserDAOTest {
 
         Date currentDate = new Date();
 
-        User entity = new User("Jeck", "Smith", "mail@gmail.com", "123456", currentDate, currentDate, currentDate, "Germany", "Berlin", "First Street", "0554856");
+        User entity = new User("Jeck", "Smith", "mail@gmail.com", "123456", currentDate, currentDate, currentDate, "Germany", "Berlin", "First Street", "0554856");        
 
         Long result = instance.save(entity);
         LOG.info("1. Saved new user: returned id " + result);
