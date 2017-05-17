@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("dictionaryService")
 @Qualifier("dictionaryService")
 @Component
-@Transactional
 public class DictionaryServiceImpl implements DictionaryService {
 
     @Autowired

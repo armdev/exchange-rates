@@ -18,7 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Component
 @Repository("userDAO")
 @Qualifier("userDAO")
-@Transactional(propagation = Propagation.REQUIRED)
 public class UserDAOImpl extends AbstractDao implements UserDAO {
 
     private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(UserDAOImpl.class);
@@ -28,6 +27,7 @@ public class UserDAOImpl extends AbstractDao implements UserDAO {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public User userLogin(String email, String password) {
         User entity = null;
         try {
@@ -44,6 +44,7 @@ public class UserDAOImpl extends AbstractDao implements UserDAO {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public Long save(User entity) {
         Date currentDate = new Date(System.currentTimeMillis());
         Long id = 0L;
@@ -63,6 +64,7 @@ public class UserDAOImpl extends AbstractDao implements UserDAO {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public Long update(User entity) {
         Long id = 0L;
         try {
@@ -76,6 +78,7 @@ public class UserDAOImpl extends AbstractDao implements UserDAO {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public User findUser(Long id) {
         User entity = null;
         try {
@@ -92,6 +95,7 @@ public class UserDAOImpl extends AbstractDao implements UserDAO {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public User getByEmail(String email) {
         User entity = null;
         try {
@@ -107,6 +111,7 @@ public class UserDAOImpl extends AbstractDao implements UserDAO {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public boolean checkUserEmailForUpdate(Long id, String email) {
         boolean retValue = false;
         try {
@@ -121,6 +126,7 @@ public class UserDAOImpl extends AbstractDao implements UserDAO {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public int updatePassword(Long userId, String password) {
         int executeUpdate = 0;
         if (userId != null && password != null) {

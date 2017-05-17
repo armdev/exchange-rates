@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("userService")
 @Qualifier("userService")
 @Component
-@Transactional(propagation = Propagation.REQUIRED)
 public class UserServiceImpl implements UserService {
 
     @Autowired

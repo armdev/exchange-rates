@@ -139,7 +139,7 @@ public class UserDAOTest {
 //    public void test10ChangePassword() {
 //        LOG.info("10. Change password");
 //        int value = instance.updatePassword(1L, "qqqqqq");
-//        assertEquals(1, value);
+//        assertEquals(1L, value);
 //    }
 
 //    @Test

@@ -22,7 +22,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Component
 @Repository("historicalDAO")
 @Qualifier("historicalDAO")
-@Transactional(propagation = Propagation.REQUIRED)
 public class HistoricalDAOImpl extends AbstractDao implements HistoricalDAO {
 
     private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(HistoricalDAOImpl.class);
@@ -32,6 +31,7 @@ public class HistoricalDAOImpl extends AbstractDao implements HistoricalDAO {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public Long save(Historical entity) {
         Long id = 0L;
         try {
@@ -45,6 +45,7 @@ public class HistoricalDAOImpl extends AbstractDao implements HistoricalDAO {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public Historical findByHistoricalDate(String historicalDate) {
         Historical entity = null;
         try {
@@ -61,6 +62,7 @@ public class HistoricalDAOImpl extends AbstractDao implements HistoricalDAO {
 
     @Override
     @SuppressWarnings("unchecked")
+    @Transactional(propagation = Propagation.REQUIRED)
     public List<Historical> findAll() {
         List<Historical> list = new ArrayList<>();
         try {

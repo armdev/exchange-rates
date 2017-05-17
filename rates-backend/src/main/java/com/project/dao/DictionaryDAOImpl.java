@@ -7,6 +7,7 @@ import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -16,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Component
 @Repository("dictionaryDAO")
 @Qualifier("dictionaryDAO")
-@Transactional
 public class DictionaryDAOImpl extends AbstractDao implements DictionaryDAO {
 
     private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(DictionaryDAOImpl.class);
@@ -27,6 +27,7 @@ public class DictionaryDAOImpl extends AbstractDao implements DictionaryDAO {
 
     @Override
     @SuppressWarnings("unchecked")
+    @Transactional(propagation = Propagation.REQUIRED)
     public List<Currency> findCurrencyList() {
         List<Currency> currecnyList = new ArrayList<>();
         try {

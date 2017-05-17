@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("historicalService")
 @Qualifier("historicalService")
 @Component
-@Transactional
 public class HistoricalServiceImpl implements HistoricalService {
 
     @Autowired
