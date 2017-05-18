@@ -3,7 +3,6 @@ package com.project.test;
 import com.project.dao.HistoricalDAO;
 import com.project.entities.Historical;
 import com.project.test.config.TestCoreConfig;
-import java.util.Date;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
