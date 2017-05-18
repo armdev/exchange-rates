@@ -1,8 +1,10 @@
 Exchange Rates
+==========
 
 Simple Java Web Monolit Application
 
 Technologies used:
+==========
 
 1. Spring 4 / File configuration
 2. Hibernate 4
@@ -21,10 +23,11 @@ Application is monolit , but backend logic in separated  jar, which will allow y
 
 In the current application architecture you can find how to use Spring and JSF together and develop rich web application.
 
-I have video sharing web application developed with microservices architecture https://github.com/armdev/tosptube , which is use also Youtube API
+I have video sharing web application developed with microservices architecture https://github.com/armdev/tosptube , which is use also Youtube API .
 
 
 How to install exchange-rates:
+==========
 
 1. Preconditions: Java 8, Maven, MySQL 5, Apache Tomcat 8
 2. cd rates-db-migrator, edit pom.xml if your database host, port, user pass is different.
@@ -37,8 +40,12 @@ How to install exchange-rates:
 
 
 Application build pipline history located here https://gitlab.com/armdev/exchange-rates/pipelines
+==========
 
-
+Screens from application located here: https://gitlab.com/armdev/exchange-rates/tree/master/screens
+==========
+Application deployed in the claud live link here : http://exchange-rates.mircloud.host/rates/index.jsf
+==========
 
 
 
