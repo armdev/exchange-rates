@@ -21,6 +21,26 @@ Application is monolit , but backend logic in separated  jar, which will allow y
 
 In the current application architecture you can find how to use Spring and JSF together and develop rich web application.
 
-Install
+I have video sharing web application developed with microservices architecture https://github.com/armdev/tosptube , which is use also Youtube API
+
+
+How to install exchange-rates:
+
+1. Preconditions: Java 8, Maven, MySQL 5, Apache Tomcat 8
+2. cd rates-db-migrator, edit pom.xml if your database host, port, user pass is different.
+3. setup database: mvn clean package -U 
+4. cd rates-backend, mvn clean package -U , it will execute also unit tests
+5. cd exchange-rates, mvn clean package -U
+6. cd rates-web/target , copy rates-web.war to apache-tomcat\webapps
+7. Start Tomcat: apache-tomcat/bin/catalina.sh start , or apache-tomcat/bin/run.bat
+8. Navigate to http://localhost:(tomcat-port))/rates-web
+
+
+Application build pipline history located here https://gitlab.com/armdev/exchange-rates/pipelines
+
+
+
+
+
 
 
