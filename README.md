@@ -46,6 +46,9 @@ How to install exchange-rates:
 8. Navigate to http://localhost:(tomcat-port))/rates-web
 
 
+Application gitlab-ci file: https://gitlab.com/armdev/exchange-rates/blob/master/.gitlab-ci.yml
+==========
+
 Application build pipline history: https://gitlab.com/armdev/exchange-rates/pipelines
 ==========
 
