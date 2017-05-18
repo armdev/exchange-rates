@@ -17,15 +17,14 @@ cache:
 
 build:
   image: maven:3.3.9-jdk-8
-  stage: build 
+  stage: build
   script:    
-    - "mvn clean package -B -Dmaven.test.skip=false"
+    - "mvn clean package -U -Dmaven.test.skip=false"
     - "ls -al"  
   artifacts:
         paths:
         - "rates-backend/target/rates-backend-1.0-SNAPSHOT.jar"      
   allow_failure: false
-
 
 deploy:
   stage: deploy
@@ -36,8 +35,7 @@ deploy:
 dockerize:
   when : manual
   only:
-    - master    
-    - /^release-.$/
+    - master        
   variables:
     TOKEN: "simpletokeneyJhbGciOiJS"
     OBJECT_CODE: "rates"
@@ -52,7 +50,7 @@ dockerize:
     
 deliver:
   stage: deliver
-  script: "echo deploy started"
+  script: "echo deliver started"
   only:
     - master
      

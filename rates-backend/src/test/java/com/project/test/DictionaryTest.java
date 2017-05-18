@@ -65,7 +65,6 @@ public class DictionaryTest {
         LOG.info("testDaoFindCurrencyList ");
         List<Currency> list = instance.findCurrencyList();
         assertNotNull(list);
-
     }
     
     
@@ -74,7 +73,6 @@ public class DictionaryTest {
         LOG.info("testServiceFindCurrencyList ");
         List<Currency> list = serviceInstance.findCurrencyList();
         assertNotNull(list);
-
     }
 
 }
