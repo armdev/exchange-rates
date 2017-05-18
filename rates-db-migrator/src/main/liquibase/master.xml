@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+              /\,%,_
+              \%%%/,\
+            _.-"%%|//%
+          .'  .-"  /%%%
+      _.-'_.-" 0)   \%%%
+     /.\.'           \%%%
+     \ /      _,      %%%
+      `"___"~`\   _,*'\%%'   _,__""""-,%%,
+               )*^     `""~~`          \%%%,
+             _/                         \%%%
+         _.-`/                           |%%,___
+     _.-"   /      ,           ,        ,|%%   .`\
+    /\     /      /             `\       \%'   \ /
+    \ \ _,/      /`~-._         _,`\      \`""~~`
+     `"` /-.,_ /'      `~"____"~    `\     \
+         \___,'                       \.-"`/
+                                       `__'
+
+-->
+
+
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+ 
+   <include file="src/main/liquibase/create.xml"/>     
+   <include file="src/main/liquibase/insert.xml"/> 
+   <include file="src/main/liquibase/alter.xml"/> 
+   <include file="src/main/liquibase/alter1.xml"/> 
+   <include file="src/main/liquibase/alter2.xml"/> 
+   
+</databaseChangeLog>

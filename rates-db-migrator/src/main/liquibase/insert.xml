@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    
+    <changeSet id="4" author="insert@gmail.com" context="initdata">
+        <sql>
+           insert  into `currency`(`id`,`currency`) values (1,'EUR'),(2,'AMD'),(3,'NZD'),(4,'AUD'),(5,'JPY'),(6,'HUF'),(7,'CAD');
+        </sql>
+    </changeSet> 
+   
+   
+</databaseChangeLog>
