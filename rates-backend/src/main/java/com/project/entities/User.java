@@ -12,7 +12,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,7 +24,6 @@ import lombok.ToString;
 @Getter
 @EqualsAndHashCode
 @ToString
-@NoArgsConstructor
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -61,6 +59,26 @@ public class User implements Serializable {
     private String street;
     @Column(name = "zipcode")
     private String zipcode;
+
+    public User() {
+    }
+
+    public User(Long id, String firstname, String lastname, String email, String passwd, Date registerDate, Date birthDate, Date lastlogindate, String country, String city, String street, String zipcode) {
+        this.id = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.passwd = passwd;
+        this.registerDate = registerDate;
+        this.birthDate = birthDate;
+        this.lastlogindate = lastlogindate;
+        this.country = country;
+        this.city = city;
+        this.street = street;
+        this.zipcode = zipcode;
+    }
+    
+    
 
     public User(String firstname, String lastname, String email, String passwd, Date registerDate, Date birthDate, Date lastlogindate, String country, String city, String street, String zipcode) {
         this.firstname = firstname;

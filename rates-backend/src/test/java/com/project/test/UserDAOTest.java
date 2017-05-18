@@ -61,7 +61,7 @@ public class UserDAOTest {
     public void test1UserSave() {
         LOG.info("1. Save User entity");
         Date currentDate = new Date();
-        User entity = new User("Jeck", "Smith", "mail10@gmail.de", "123456", currentDate, currentDate, currentDate, "Germany", "Berlin", "First Street", "0554856");
+        User entity = new User("Jeck", "Smith", "mail1@gmail.de", "123456", currentDate, currentDate, currentDate, "Germany", "Berlin", "First Street", "0554856");
         Long userId = instance.save(entity);
         LOG.info("Saved new user: returned id " + userId);
         assertNotNull(userId);
@@ -104,21 +104,21 @@ public class UserDAOTest {
     @Test
     public void test6CheckUserEmailForUpdateFalse() {
         LOG.info("6. Check User Email For Update False: ");        
-        boolean checkUserEmailForUpdate = instance.checkUserEmailForUpdate(1L, "mail10@gmail.de");
+        boolean checkUserEmailForUpdate = instance.checkUserEmailForUpdate(1L, "mail1@gmail.de");
         assertEquals(checkUserEmailForUpdate, Boolean.FALSE);
     }
 
     @Test
     public void test7CheckUserEmailForUpdateTrue() {
         LOG.info("7. Check User Email For Update True : ");       
-        boolean checkUserEmailForUpdateTrue = instance.checkUserEmailForUpdate(0L, "mail10@gmail.de");
+        boolean checkUserEmailForUpdateTrue = instance.checkUserEmailForUpdate(0L, "mail1@gmail.de");
         assertEquals(checkUserEmailForUpdateTrue, Boolean.TRUE);
     }
 
     @Test
     public void test8FindUserByEmail() {
         LOG.info("8. Find user by Email ");
-        User findByEmail = instance.getByEmail("mail10@gmail.de");
+        User findByEmail = instance.getByEmail("mail1@gmail.de");
         assertNotNull(findByEmail);
     }
 
@@ -148,11 +148,11 @@ public class UserDAOTest {
         assertEquals(value, 0);
     }
 
-    @Test
+    @Test    
     public void test93UpdateUserEntity() {
         LOG.info("12. Update user");    
         Date currentDate = new Date();
-        User entity = new User("Anna", "Smith", "dolly@gmail.de", "123456", currentDate, currentDate, currentDate, "Germany", "Berlin", "First Street", "0554856");
+        User entity = new User("Anna", "Smith", "mail88@gmail.de", "123456", currentDate, currentDate, currentDate, "Germany", "Berlin", "First Street", "0554856");
         Long userId = instance.save(entity);       
         entity.setId(userId);
         Long value = instance.update(entity);
