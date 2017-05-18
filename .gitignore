@@ -4,3 +4,5 @@
 /rates-main/rates-backend/nbproject/
 /rates-main/rates-backend/target/
 /rates-main/rates-web/target/
+/liquibase-maven-app/target/
+/rates-db-migrator/target/
