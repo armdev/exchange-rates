@@ -39,12 +39,12 @@ How to install exchange-rates:
 8. Navigate to http://localhost:(tomcat-port))/rates-web
 
 
-Application build pipline history located here https://gitlab.com/armdev/exchange-rates/pipelines
+Application build pipline history: https://gitlab.com/armdev/exchange-rates/pipelines
 ==========
 
-Screens from application located here: https://gitlab.com/armdev/exchange-rates/tree/master/screens
+Screens from application : https://gitlab.com/armdev/exchange-rates/tree/master/screens
 ==========
-Application deployed in the claud live link here : http://exchange-rates.mircloud.host/rates/index.jsf
+Application deployed in the cloud : http://exchange-rates.mircloud.host/rates/index.jsf
 ==========
 
 
