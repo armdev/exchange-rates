@@ -3,6 +3,7 @@ image: maven:3.3.9-jdk-8
 stages:
   - build
   - deploy
+  - dockerize
   - deliver
 
 services:
@@ -14,7 +15,7 @@ cache:
    - rates-backend/
    - rates-web/
 
-maven-build:
+build:
   image: maven:3.3.9-jdk-8
   stage: build 
   script:    
@@ -28,13 +29,30 @@ maven-build:
 
 deploy:
   stage: deploy
-  script: "echo Delivery started"
+  script: "echo deploy started"
   only:
     - master
+ 
+dockerize:
+  when : manual
+  only:
+    - master    
+    - /^release-.$/
+  variables:
+    TOKEN: "simpletokeneyJhbGciOiJS"
+    OBJECT_CODE: "rates"
+    IMG_NAME: "awl-cool-rates"
+    TAG: "latest"
+    GIT_REPO_URL: "git@gitlab.rates.git"
+    DOCKERFILE_DIR: "server"
+    BRANCH: "develop"
+  stage: dockerize
+  script:
+    - POM_VERSION=$(mvn -q -Dexec.executable="echo" -Dexec.args='${project.version}' --non-recursive exec:exec)
     
 deliver:
   stage: deliver
-  script: "echo Delivery started"
+  script: "echo deploy started"
   only:
-    - master    
- 
+    - master
+     
