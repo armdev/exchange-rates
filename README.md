@@ -54,8 +54,6 @@ Application build pipline history: https://gitlab.com/armdev/exchange-rates/pipe
 
 Screens from application : https://gitlab.com/armdev/exchange-rates/tree/master/screens
 ==========
-Application deployed in the cloud : http://exchange-rates.mircloud.host/rates/index.jsf
-==========
 
 
 
