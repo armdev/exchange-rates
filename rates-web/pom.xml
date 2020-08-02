@@ -35,7 +35,7 @@
         <io.vavr>0.9.0</io.vavr>
         <org.codehaus.jackson>1.9.13</org.codehaus.jackson>
         <json-simple>1.1.1</json-simple>
-        <commons-beanutils>1.9.2</commons-beanutils>
+        <commons-beanutils>1.9.4</commons-beanutils>
     </properties>  
     <dependencies>     
         <dependency>
