@@ -1,7 +1,7 @@
 Exchange Rates
 ==========
 
-Architecture type: Java Monolit Web Application
+Architecture type: Java Monolith Web Application
 
 Technologies used:
 ==========
