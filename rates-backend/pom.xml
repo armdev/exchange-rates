@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <mysql.driver.version>5.1.34</mysql.driver.version>
+        <mysql.driver.version>8.0.16</mysql.driver.version>
         <spring.version>4.3.18</spring.version>     
         <net.sourceforge.cglib>2.2.0</net.sourceforge.cglib>
         <slf4j-api>1.7.2</slf4j-api>
